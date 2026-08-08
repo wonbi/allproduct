@@ -92,7 +92,8 @@ td.item{min-width:248px}
 .itag{font-size:10px;color:var(--steel-2);margin-top:2px}
 .itag .tx{color:var(--up)}
 .itag .wh{color:var(--amber)}
-td.spec{font-size:11px;color:var(--steel);max-width:230px;line-height:1.5}
+td.spec{font-size:11px;color:var(--steel);max-width:230px;line-height:1.5;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis}
 td.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .pcur{font-size:16.5px;font-weight:800;color:var(--amber);letter-spacing:-.3px}
 .pcur small{font-size:10.5px;color:var(--amber-dim);margin-left:1px;font-weight:700}
@@ -202,13 +203,18 @@ async function loadCatalog(){
       cut    : r.orderCutoff || '',
       exp    : r.shelfLife || '',
       ref    : r.note || '',
-      srcWh  : '',
+      srcWh  : (r.sourceWarehouse || '').trim(),
       spec   : Array.isArray(r.spec) ? r.spec : (r.spec ? [r.spec] : []),
       img    : r.image || '',
       cat0   : r.category || ''
     });
   });
-  return order.filter(w => byWh[w].length).map(w => ({ wh: w, products: byWh[w], mixed: false }));
+  // 한 탭(창고)에 실제 출고 창고가 다른 상품이 섞여 있으면(예: 당일생물, 단독 특가류)
+  // 행마다 srcWh 배지를 보여주고, 배송비 안내 문구도 다르게 표시한다.
+  return order.filter(w => byWh[w].length).map(w => {
+    const distinct = new Set(byWh[w].map(p => p.srcWh).filter(Boolean));
+    return { wh: w, products: byWh[w], mixed: distinct.size > 1 };
+  });
 }
 let DOC_META = {};
 // ── 렌더링 ──

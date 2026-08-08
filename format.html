@@ -99,7 +99,8 @@ footer b{color:var(--ink)}
       <tr><td>택배비 <span class="opt">선택</span></td><td><code>shipFee</code></td><td>숫자 (0 = 무료배송)</td><td class="ex">4000</td></tr>
       <tr><td>발주마감 <span class="opt">선택</span></td><td><code>orderCutoff</code></td><td>문자</td><td class="ex">당일 14시</td></tr>
       <tr><td>유통기한 <span class="opt">선택</span></td><td><code>shelfLife</code></td><td>문자</td><td class="ex">냉동 12개월</td></tr>
-      <tr><td>사진 <span class="opt">선택</span></td><td><code>image</code></td><td>파일명 또는 URL</td><td class="ex">images/전복.webp</td></tr>
+      <tr><td>사진 <span class="opt">선택</span></td><td><code>image</code></td><td>접근 가능한 URL</td><td class="ex">https://.../전복.jpg</td></tr>
+      <tr><td>실제 출고 창고 <span class="opt">선택</span></td><td><code>sourceWarehouse</code></td><td>문자</td><td class="ex">한 분류에 여러 창고 상품이 섞일 때만 — 상품별 배지로 표시</td></tr>
       <tr><td>비고 <span class="opt">선택</span></td><td><code>note</code></td><td>문자</td><td class="ex">산지직송</td></tr>
     </tbody>
   </table></div>
@@ -138,7 +139,7 @@ footer b{color:var(--ink)}
    "shipFee": 0,
    "orderCutoff": "당일 15시",
    "shelfLife": "냉동 12개월",
-   "image": "images/전복.webp",
+   "image": "https://example.com/전복.jpg",
    "note": ""
   }
  ]
