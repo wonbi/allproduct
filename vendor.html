@@ -1,0 +1,373 @@
+<title>상품 입고 접수부 · 마스터 유통</title>
+<style>
+:root{
+  --paper:#f6f3ea;--surface:#ffffff;--surface-2:#efe9da;--ink:#1b2420;--muted:#6d766a;
+  --line:#e2dbc4;--line-2:#ece6d4;--accent:#0d6b4d;--accent-deep:#093f2f;--accent-soft:#e1eee5;
+  --stamp:#b5842f;--stamp-soft:#f5ecd8;--up:#b8452f;--down:#2b6f92;
+  --shadow:0 1px 2px rgba(27,36,32,.06),0 10px 26px rgba(27,36,32,.07);--radius:16px;--radius-sm:10px;
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0e120e;--surface:#171d17;--surface-2:#1e251e;--ink:#e9e6da;--muted:#8f9c8b;
+    --line:#2a3128;--line-2:#232a22;--accent:#45b78d;--accent-deep:#8fd9b8;--accent-soft:#193026;
+    --stamp:#d7ac5c;--stamp-soft:#2a2416;--up:#e2836d;--down:#7db4d6;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0e120e;--surface:#171d17;--surface-2:#1e251e;--ink:#e9e6da;--muted:#8f9c8b;
+  --line:#2a3128;--line-2:#232a22;--accent:#45b78d;--accent-deep:#8fd9b8;--accent-soft:#193026;
+  --stamp:#d7ac5c;--stamp-soft:#2a2416;--up:#e2836d;--down:#7db4d6;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif;line-height:1.5;padding-bottom:64px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+a{color:inherit}
+::selection{background:var(--accent-soft)}
+
+header{padding:34px 0 22px;border-bottom:1px solid var(--line)}
+.hrow{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.14em;color:var(--accent);text-transform:uppercase}
+h1{font-family:-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-weight:800;font-size:30px;letter-spacing:-.5px;margin:6px 0 8px;text-wrap:balance}
+.sub{font-size:13.5px;color:var(--muted);max-width:520px}
+.stamp-badge{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-family:-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif}
+.stamp-badge .num{font-size:34px;font-weight:800;color:var(--accent-deep);font-variant-numeric:tabular-nums}
+.stamp-badge .lbl{font-size:10.5px;color:var(--muted);font-family:-apple-system,sans-serif;letter-spacing:.04em}
+
+.note{margin-top:18px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--stamp);border-radius:var(--radius-sm);padding:12px 15px;font-size:12.5px;color:var(--ink);display:flex;gap:9px;box-shadow:var(--shadow)}
+.note b{color:var(--accent-deep)}
+
+.grid2{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;margin-top:26px;align-items:start}
+@media(max-width:860px){.grid2{grid-template-columns:1fr}}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.panel-head{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.panel-head h2{font-size:13px;font-weight:800;letter-spacing:.02em}
+.panel-head .cnt{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.panel-body{padding:18px}
+
+.sect{margin-bottom:18px}
+.sect:last-child{margin-bottom:0}
+.sect-title{font-size:10.5px;font-weight:800;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:9px;display:flex;align-items:center;gap:7px}
+.sect-title::after{content:'';flex:1;height:1px;background:var(--line-2)}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px}
+.f-full{grid-column:1/-1}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:11.5px;font-weight:600;color:var(--muted)}
+.field label .req{color:var(--up);margin-left:2px}
+.field input,.field select,.field textarea{
+  border:1.4px solid var(--line);border-radius:9px;padding:9px 11px;font-size:13.5px;background:var(--paper);color:var(--ink);
+  font-family:inherit;outline:none;transition:.12s border-color;width:100%
+}
+.field textarea{resize:vertical;min-height:56px;line-height:1.5}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent)}
+.field.ship-free input[type=number]{opacity:.5}
+.chk{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted);margin-top:5px}
+.chk input{width:auto}
+.filerow{display:flex;align-items:center;gap:10px}
+.filerow .fname{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.filebtn{border:1.4px dashed var(--line);background:var(--surface-2);border-radius:9px;padding:8px 12px;font-size:12px;color:var(--muted);cursor:pointer;flex:none}
+.filebtn:hover{border-color:var(--accent);color:var(--accent-deep)}
+
+.addbtn{margin-top:16px;width:100%;background:var(--accent);color:#fff;border:none;border-radius:11px;padding:13px;font-size:14px;font-weight:800;cursor:pointer;transition:.12s;font-family:inherit;letter-spacing:-.1px}
+.addbtn:hover{background:var(--accent-deep)}
+.addbtn:active{transform:translateY(1px)}
+
+/* preview card — mirrors the live catalog's card language */
+.preview-wrap{padding:18px}
+.preview-hint{font-size:11px;color:var(--muted);margin-bottom:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);max-width:280px;margin:0 auto}
+.thumb{aspect-ratio:4/3;width:100%;object-fit:cover;display:block;background:var(--surface-2)}
+.nothumb{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:11px;background:
+  repeating-linear-gradient(135deg,var(--surface-2),var(--surface-2) 8px,var(--line-2) 8px,var(--line-2) 16px)}
+.cbd{padding:12px 13px 13px;display:flex;flex-direction:column;gap:6px}
+.whb{align-self:flex-start;font-size:10px;font-weight:700;color:var(--stamp);background:var(--stamp-soft);padding:2px 8px;border-radius:5px}
+.pn{font-size:14px;font-weight:700;letter-spacing:-.2px}
+.tg{font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;background:var(--surface-2);color:var(--muted);align-self:flex-start}
+.tg.tax{background:var(--accent-soft);color:var(--accent-deep)}
+.spec-p{font-size:10.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:6px;margin-top:2px;line-height:1.5}
+.prow{display:flex;align-items:flex-end;justify-content:space-between;padding-top:2px}
+.price{font-size:19px;font-weight:800;letter-spacing:-.4px;font-variant-numeric:tabular-nums;color:var(--ink)}
+.price small{font-size:11px;font-weight:600;color:var(--muted)}
+.old{font-size:10.5px;color:var(--muted);text-decoration:line-through;display:block;font-variant-numeric:tabular-nums}
+.ship{font-size:10.5px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.ship b{color:var(--ink)}
+.free{color:var(--accent);font-weight:700}
+
+/* ledger table */
+.ledger{margin-top:22px}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+thead th{text-align:left;font-size:10.5px;font-weight:800;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;padding:0 10px 8px;border-bottom:1px solid var(--line)}
+tbody td{padding:10px;border-bottom:1px solid var(--line-2);vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+td.num{font-variant-numeric:tabular-nums;text-align:right}
+.mini-thumb{width:34px;height:34px;border-radius:6px;object-fit:cover;background:var(--surface-2);display:block}
+.mini-nothumb{width:34px;height:34px;border-radius:6px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--muted)}
+.delbtn{border:none;background:none;color:var(--up);cursor:pointer;font-size:12px;font-weight:700;padding:4px 6px;border-radius:6px}
+.delbtn:hover{background:color-mix(in srgb,var(--up) 12%,transparent)}
+.emptyrow td{text-align:center;color:var(--muted);padding:34px 0;font-size:12.5px}
+
+/* export */
+.export{margin-top:22px}
+.export-note{font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.6}
+pre#tsvOut{margin:0;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:13px 14px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11.5px;color:var(--ink);white-space:pre;overflow-x:auto;max-height:220px}
+.exportbtns{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.btn{border:1.4px solid var(--line);background:var(--surface);color:var(--ink);border-radius:9px;padding:9px 15px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:.12s}
+.btn:hover{border-color:var(--accent);color:var(--accent-deep)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
+.btn.ghost{color:var(--muted)}
+
+footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-size:11px;color:var(--muted);text-align:center;line-height:1.8}
+footer b{color:var(--ink)}
+
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 20px;border-radius:20px;font-size:12.5px;font-weight:700;opacity:0;transition:opacity .2s;pointer-events:none;z-index:99}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="hrow">
+    <div>
+      <div class="eyebrow">거래처 상품 등록</div>
+      <h1>상품 입고 접수부</h1>
+      <div class="sub">마스터 유통 · 창고별 상품 정보를 정리해 보내주시면 카탈로그에 그대로 반영합니다. 여러 개 등록하실 땐 목록에 계속 추가해 주세요.<br><a href="index.html" style="color:var(--accent);font-weight:700">← 상품 시세판</a> · <a href="format.html" style="color:var(--accent);font-weight:700">데이터 형식 안내 ↗</a></div>
+    </div>
+    <div class="stamp-badge"><span class="num" id="itemCount">0</span><span class="lbl">건 접수 대기</span></div>
+  </div>
+  <div class="note">📦 <span><b>같은 창고 상품을 먼저 몰아서 입력</b>하시면 편해요. 다 넣으신 뒤 맨 아래 <b>내보내기</b>에서 전체 내용을 한 번에 복사해 담당자에게 전달하시면 됩니다.</span></div>
+</header>
+
+<div class="grid2">
+  <section class="panel">
+    <div class="panel-head"><h2>1 · 상품 정보 입력</h2></div>
+    <div class="panel-body">
+      <form id="pform">
+        <div class="sect">
+          <div class="sect-title">기본 정보</div>
+          <div class="fgrid">
+            <div class="field f-full"><label>창고명<span class="req">*</span></label>
+              <input list="whList" id="f_wh" placeholder="예: 동해, 군산, 완전…" autocomplete="off" required>
+              <datalist id="whList"><option value="동해"><option value="군산"><option value="완전"><option value="민장"><option value="충무"><option value="이성"><option value="하남"><option value="김포"><option value="찐한국"></datalist>
+            </div>
+            <div class="field"><label>카테고리</label>
+              <select id="f_cat"><option value="수산">수산</option><option value="축산">축산</option><option value="과일">과일</option><option value="김치·반찬">김치·반찬</option><option value="간편식">간편식</option><option value="생활용품">생활용품</option><option value="가공·기타">가공·기타</option></select>
+            </div>
+            <div class="field"><label>상품명<span class="req">*</span></label><input id="f_name" placeholder="예: 임금님 5-6미 전복 1kg" required></div>
+            <div class="field f-full"><label>규격 · 스펙</label><textarea id="f_spec" placeholder="한 줄에 하나씩 — 예:&#10;1kg / 5-6미&#10;손질 후 600g 내외"></textarea></div>
+          </div>
+        </div>
+
+        <div class="sect">
+          <div class="sect-title">가격 · 배송</div>
+          <div class="fgrid">
+            <div class="field"><label>공급가(원)<span class="req">*</span></label><input id="f_price" type="number" min="0" placeholder="25500" required></div>
+            <div class="field"><label>기존가(가격 변경 시만)</label><input id="f_old" type="number" min="0" placeholder="비워두면 신규 등록"></div>
+            <div class="field"><label>면세 / 과세</label><select id="f_tax"><option value="면세">면세</option><option value="과세">과세</option><option value="">미기재</option></select></div>
+            <div class="field"><label>택배사</label><input id="f_courier" placeholder="예: 씨제이대한통운"></div>
+            <div class="field"><label>택배비(원)</label><input id="f_ship" type="number" min="0" value="4000">
+              <label class="chk"><input type="checkbox" id="f_free">무료배송</label>
+            </div>
+            <div class="field"><label>발주마감</label><input id="f_cut" placeholder="예: 당일 14시"></div>
+            <div class="field f-full"><label>유통기한</label><input id="f_exp" placeholder="예: 냉동 12개월"></div>
+          </div>
+        </div>
+
+        <div class="sect">
+          <div class="sect-title">사진 · 비고</div>
+          <div class="fgrid">
+            <div class="field f-full"><label>상품 사진</label>
+              <div class="filerow">
+                <label class="filebtn" for="f_photo">📷 사진 선택</label>
+                <input type="file" id="f_photo" accept="image/*" style="display:none">
+                <span class="fname" id="f_photoName">미리보기 확인용 — 원본 파일은 카카오톡/이메일로 별도 전달해 주세요</span>
+              </div>
+            </div>
+            <div class="field f-full"><label>비고</label><textarea id="f_memo" placeholder="전달하고 싶은 특이사항이 있다면 적어주세요"></textarea></div>
+          </div>
+        </div>
+
+        <button type="submit" class="addbtn">+ 접수 목록에 추가</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><h2>구매자 화면 미리보기</h2></div>
+    <div class="preview-wrap">
+      <div class="preview-hint">입력하신 내용이 실제 카탈로그 카드에 이렇게 표시됩니다.</div>
+      <div id="previewCard"></div>
+    </div>
+  </section>
+</div>
+
+<section class="panel ledger">
+  <div class="panel-head"><h2>2 · 접수 목록</h2><span class="cnt" id="ledgerCnt">0건</span></div>
+  <div class="panel-body" style="padding-top:6px">
+    <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>사진</th><th>창고</th><th>상품명</th><th>카테고리</th><th style="text-align:right">공급가</th><th></th></tr></thead>
+        <tbody id="ledgerBody"><tr class="emptyrow"><td colspan="6">아직 추가된 상품이 없습니다. 왼쪽에서 상품을 입력하고 '접수 목록에 추가'를 눌러주세요.</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="panel export">
+  <div class="panel-head"><h2>3 · 내보내기</h2></div>
+  <div class="panel-body">
+    <div class="export-note">아래 내용을 그대로 복사해서 담당자에게 전달해 주세요. 탭으로 구분되어 있어 <b style="color:var(--ink)">구글시트에 붙여넣으면 열이 자동으로 맞춰집니다.</b></div>
+    <pre id="tsvOut">등록된 상품이 없습니다.</pre>
+    <div class="exportbtns">
+      <button class="btn primary" id="btnCopy">📋 표 형식 복사 (시트 붙여넣기용)</button>
+      <button class="btn" id="btnDownload">⬇ TSV 파일</button>
+      <button class="btn" id="btnJson">⬇ JSON 파일 (사이트 연동용)</button>
+      <button class="btn ghost" id="btnClear">🗑 목록 비우기</button>
+    </div>
+  </div>
+</section>
+
+<footer>마스터 유통 · 거래처 상품 등록 접수부<br>상품 문의 · 수량 문의 : <b>010-2455-4156 홍찬화 팀장</b> · 입력 내용은 이 브라우저에만 임시 저장됩니다</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const STORE_KEY='mv_vendor_intake_v1';
+let items=[];
+try{items=JSON.parse(localStorage.getItem(STORE_KEY)||'[]');}catch(e){items=[];}
+
+function won(n){return (n||0).toLocaleString('ko-KR');}
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function toast(m){const t=$('toast');t.textContent=m;t.style.opacity='1';setTimeout(()=>t.style.opacity='0',1700);}
+
+function readForm(){
+  const free=$('f_free').checked;
+  return{
+    wh:$('f_wh').value.trim(), cat:$('f_cat').value, name:$('f_name').value.trim(),
+    spec:$('f_spec').value.split('\n').map(s=>s.trim()).filter(Boolean),
+    price:parseInt($('f_price').value||'0',10)||0,
+    old:$('f_old').value?parseInt($('f_old').value,10):null,
+    tax:$('f_tax').value, courier:$('f_courier').value.trim(),
+    ship: free?0:(parseInt($('f_ship').value||'0',10)||0), free,
+    cut:$('f_cut').value.trim(), exp:$('f_exp').value.trim(),
+    memo:$('f_memo').value.trim(), photo:$('f_photo')._dataUrl||''
+  };
+}
+
+function cardHtml(p){
+  const thumb=p.photo?('<img class="thumb" src="'+p.photo+'">'):'<div class="nothumb">사진 준비중</div>';
+  const taxc=p.tax==='과세'?'':'tax';
+  const oldh=(p.old&&p.old!==p.price)?('<span class="old">'+won(p.old)+'원</span>'):'';
+  const sh=p.free?'<span class="free">무료배송</span>':(p.ship>0?((p.courier?esc(p.courier)+' ':'')+'<b>'+won(p.ship)+'원</b>'):'배송비 문의');
+  return '<div class="card">'+thumb+'<div class="cbd">'
+    +(p.wh?'<span class="whb">📦 '+esc(p.wh)+'</span>':'')
+    +'<div class="pn">'+(esc(p.name)||'상품명을 입력해 주세요')+'</div>'
+    +(p.tax?'<span class="tg '+taxc+'">'+esc(p.tax)+'</span>':'')
+    +(p.spec.length?'<div class="spec-p">'+p.spec.map(s=>esc(s)).join('<br>')+'</div>':'')
+    +'<div class="prow"><div>'+oldh+'<div class="price">'+won(p.price)+'<small>원</small></div></div><div class="ship">'+sh+(p.cut?'<br>'+esc(p.cut):'')+'</div></div>'
+    +'</div></div>';
+}
+
+function renderPreview(){$('previewCard').innerHTML=cardHtml(readForm());}
+
+function renderLedger(){
+  $('itemCount').textContent=items.length;
+  $('ledgerCnt').textContent=items.length+'건';
+  if(!items.length){
+    $('ledgerBody').innerHTML='<tr class="emptyrow"><td colspan="6">아직 추가된 상품이 없습니다. 왼쪽에서 상품을 입력하고 \'접수 목록에 추가\'를 눌러주세요.</td></tr>';
+  }else{
+    $('ledgerBody').innerHTML=items.map((p,i)=>{
+      const th=p.photo?('<img class="mini-thumb" src="'+p.photo+'">'):'<div class="mini-nothumb">-</div>';
+      return '<tr><td>'+th+'</td><td>'+esc(p.wh)+'</td><td>'+esc(p.name)+'</td><td>'+esc(p.cat)+'</td><td class="num">'+won(p.price)+'원</td><td><button class="delbtn" data-i="'+i+'">삭제</button></td></tr>';
+    }).join('');
+  }
+  const rows=items.map(p=>[p.wh,p.cat,p.name,p.spec.join(' / '),p.price,p.old||'',p.tax,p.courier,p.free?'무료':p.ship,p.cut,p.exp,p.memo].join('\t'));
+  $('tsvOut').textContent = items.length
+    ? ['창고명\t카테고리\t상품명\t규격\t공급가\t기존가\t면세과세\t택배사\t택배비\t발주마감\t유통기한\t비고'].concat(rows).join('\n')
+    : '등록된 상품이 없습니다.';
+}
+
+function save(){localStorage.setItem(STORE_KEY, JSON.stringify(items));}
+
+$('pform').addEventListener('submit', e=>{
+  e.preventDefault();
+  const p=readForm();
+  if(!p.wh||!p.name||!p.price){toast('창고명 · 상품명 · 공급가는 꼭 입력해 주세요');return;}
+  items.push(p); save(); renderLedger();
+  const keepWh=p.wh;
+  $('pform').reset(); $('f_wh').value=keepWh; $('f_ship').value=4000; $('f_free').checked=false;
+  $('f_photo')._dataUrl=''; $('f_photoName').textContent='미리보기 확인용 — 원본 파일은 카카오톡/이메일로 별도 전달해 주세요';
+  renderPreview();
+  toast('목록에 추가했어요 · '+items.length+'건');
+});
+
+$('ledgerBody').addEventListener('click', e=>{
+  const b=e.target.closest('.delbtn'); if(!b)return;
+  items.splice(parseInt(b.getAttribute('data-i'),10),1); save(); renderLedger();
+});
+
+$('f_photo').addEventListener('change', e=>{
+  const file=e.target.files[0]; if(!file)return;
+  const reader=new FileReader();
+  reader.onload=()=>{ e.target._dataUrl=reader.result; $('f_photoName').textContent=file.name; renderPreview(); };
+  reader.readAsDataURL(file);
+});
+
+['f_wh','f_cat','f_name','f_spec','f_price','f_old','f_tax','f_courier','f_ship','f_free','f_cut','f_exp'].forEach(id=>{
+  $(id).addEventListener('input', renderPreview);
+  $(id).addEventListener('change', renderPreview);
+});
+
+$('btnCopy').addEventListener('click', ()=>{
+  if(!items.length){toast('복사할 내용이 없습니다');return;}
+  navigator.clipboard.writeText($('tsvOut').textContent).then(()=>toast('전체 내용 복사됨'));
+});
+$('btnDownload').addEventListener('click', ()=>{
+  if(!items.length){toast('저장할 내용이 없습니다');return;}
+  const blob=new Blob([$('tsvOut').textContent],{type:'text/tab-separated-values'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='마스터유통_상품접수_'+new Date().toISOString().slice(0,10)+'.tsv';
+  document.body.appendChild(a); a.click(); a.remove();
+});
+function toSchema(){
+  return {
+    updatedAt: new Date().toISOString().slice(0,10),
+    supplier: '',
+    products: items.map(p=>({
+      warehouse: p.wh,
+      category: p.cat,
+      name: p.name,
+      spec: p.spec,
+      supplyPrice: p.price,
+      previousPrice: p.old || null,
+      tax: p.tax,
+      courier: p.courier,
+      shipFee: p.free ? 0 : p.ship,
+      orderCutoff: p.cut,
+      shelfLife: p.exp,
+      image: '',
+      note: p.memo
+    }))
+  };
+}
+$('btnJson').addEventListener('click', ()=>{
+  if(!items.length){toast('저장할 내용이 없습니다');return;}
+  const blob=new Blob([JSON.stringify(toSchema(),null,1)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='products.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  toast('products.json 저장됨');
+});
+$('btnClear').addEventListener('click', ()=>{
+  if(!items.length)return;
+  if(!confirm(items.length+'건을 모두 지울까요?'))return;
+  items=[]; save(); renderLedger(); toast('목록을 비웠습니다');
+});
+
+$('f_ship').addEventListener('input',()=>{});
+$('f_free').addEventListener('change',e=>{$('f_ship').closest('.field').classList.toggle('ship-free',e.target.checked);});
+
+renderLedger(); renderPreview();
+if(items.length) toast('이전에 입력하던 '+items.length+'건을 불러왔어요');
+</script>

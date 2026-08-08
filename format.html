@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>상품 데이터 형식 안내 · 마스터 유통</title>
+<style>
+:root{
+  --paper:#f6f3ea;--surface:#ffffff;--surface-2:#efe9da;--ink:#1b2420;--muted:#6d766a;
+  --line:#e2dbc4;--line-2:#ece6d4;--accent:#0d6b4d;--accent-deep:#093f2f;--accent-soft:#e1eee5;
+  --stamp:#b5842f;--stamp-soft:#f5ecd8;--req:#b8452f;
+  --shadow:0 1px 2px rgba(27,36,32,.06),0 8px 22px rgba(27,36,32,.06);
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0e120e;--surface:#171d17;--surface-2:#1e251e;--ink:#e9e6da;--muted:#8f9c8b;
+  --line:#2a3128;--line-2:#232a22;--accent:#45b78d;--accent-deep:#8fd9b8;--accent-soft:#193026;
+  --stamp:#d7ac5c;--stamp-soft:#2a2416;--req:#e2836d;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 26px rgba(0,0,0,.3);
+}}
+:root[data-theme="dark"]{
+  --paper:#0e120e;--surface:#171d17;--surface-2:#1e251e;--ink:#e9e6da;--muted:#8f9c8b;
+  --line:#2a3128;--line-2:#232a22;--accent:#45b78d;--accent-deep:#8fd9b8;--accent-soft:#193026;
+  --stamp:#d7ac5c;--stamp-soft:#2a2416;--req:#e2836d;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 26px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);line-height:1.65;padding-bottom:60px;
+  font-family:-apple-system,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+a{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+header{padding:34px 0 22px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.15em;color:var(--accent);text-transform:uppercase}
+h1{font-size:28px;font-weight:800;letter-spacing:-.6px;margin:7px 0 9px;text-wrap:balance}
+.lede{font-size:14px;color:var(--muted);max-width:44em}
+.nav{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+.nav a{border:1.4px solid var(--line);background:var(--surface);border-radius:9px;padding:8px 14px;
+  font-size:12.5px;font-weight:700;text-decoration:none;color:var(--ink)}
+.nav a:hover{border-color:var(--accent);color:var(--accent-deep)}
+
+section{padding:34px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:none}
+h2{font-size:18px;font-weight:800;letter-spacing:-.3px;margin-bottom:6px;display:flex;align-items:baseline;gap:9px}
+h2 .no{font-size:12px;font-weight:800;color:var(--accent);letter-spacing:.06em}
+.desc{font-size:13.5px;color:var(--muted);margin-bottom:16px;max-width:46em}
+
+.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:11px;background:var(--surface);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
+thead th{text-align:left;background:var(--surface-2);font-size:10.5px;font-weight:800;color:var(--muted);
+  letter-spacing:.07em;padding:10px 13px;border-bottom:1px solid var(--line);white-space:nowrap}
+tbody td{padding:10px 13px;border-bottom:1px solid var(--line-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;
+  background:var(--surface-2);padding:2px 6px;border-radius:5px;white-space:nowrap}
+.req{color:var(--req);font-weight:800;font-size:10.5px}
+.opt{color:var(--muted);font-size:10.5px}
+td.ex{color:var(--muted);font-size:12.5px}
+
+pre{background:var(--surface-2);border:1px solid var(--line);border-radius:11px;padding:16px;
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.7;
+  overflow-x:auto;color:var(--ink)}
+.callout{background:var(--stamp-soft);border:1px solid var(--line);border-left:4px solid var(--stamp);
+  border-radius:10px;padding:13px 16px;font-size:13px;line-height:1.7;margin-top:16px}
+.callout b{color:var(--ink)}
+.steps{display:grid;gap:11px;margin-top:6px}
+.step{display:flex;gap:13px;background:var(--surface);border:1px solid var(--line);border-radius:11px;
+  padding:14px 16px;box-shadow:var(--shadow)}
+.step .n{flex:none;width:25px;height:25px;border-radius:50%;background:var(--accent);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:800}
+.step .t{font-size:13.5px}
+.step .t b{display:block;margin-bottom:2px;font-size:14px}
+footer{padding-top:22px;font-size:11.5px;color:var(--muted);text-align:center;line-height:1.9}
+footer b{color:var(--ink)}
+</style></head><body><div class="wrap">
+
+<header>
+  <div class="eyebrow">거래처 공급사 안내</div>
+  <h1>상품 데이터 제출 형식</h1>
+  <p class="lede">공급해 주시는 상품 정보를 아래 형식으로 보내주시면 카탈로그에 자동으로 반영됩니다. 항목 이름과 단위만 맞춰주시면 되고, 파일 형식은 편하신 쪽(표 붙여넣기 · TSV · JSON) 아무거나 괜찮습니다.</p>
+  <div class="nav">
+    <a href="index.html">📊 상품 시세판 보기</a>
+    <a href="vendor.html">📋 상품 등록 폼 열기</a>
+    <a href="data/products.json">🗂 예시 JSON 원본</a>
+  </div>
+</header>
+
+<section>
+  <h2><span class="no">01</span> 항목 정의</h2>
+  <p class="desc"><span class="req">필수</span> 표시된 3개만 있으면 등록은 가능합니다. 나머지는 비어 있으면 화면에서 해당 줄이 자동으로 숨겨집니다.</p>
+  <div class="tblwrap"><table>
+    <thead><tr><th>항목</th><th>필드명</th><th>형식</th><th>예시</th></tr></thead>
+    <tbody>
+      <tr><td>창고명 <span class="req">필수</span></td><td><code>warehouse</code></td><td>문자</td><td class="ex">동해</td></tr>
+      <tr><td>상품명 <span class="req">필수</span></td><td><code>name</code></td><td>문자</td><td class="ex">임금님 5-6미 전복 1kg</td></tr>
+      <tr><td>공급가 <span class="req">필수</span></td><td><code>supplyPrice</code></td><td>숫자 (원, 쉼표 없이)</td><td class="ex">25500</td></tr>
+      <tr><td>카테고리 <span class="opt">선택</span></td><td><code>category</code></td><td>문자</td><td class="ex">수산 / 축산 / 간편식 / 생활용품 …</td></tr>
+      <tr><td>규격 · 스펙 <span class="opt">선택</span></td><td><code>spec</code></td><td>문자 배열</td><td class="ex">["1kg / 5-6미", "손질 후 600g"]</td></tr>
+      <tr><td>기존가 <span class="opt">선택</span></td><td><code>previousPrice</code></td><td>숫자 또는 <code>null</code></td><td class="ex">23000 → 인상·인하 자동 표시</td></tr>
+      <tr><td>면세 / 과세 <span class="opt">선택</span></td><td><code>tax</code></td><td>문자</td><td class="ex">면세</td></tr>
+      <tr><td>택배사 <span class="opt">선택</span></td><td><code>courier</code></td><td>문자</td><td class="ex">씨제이대한통운</td></tr>
+      <tr><td>택배비 <span class="opt">선택</span></td><td><code>shipFee</code></td><td>숫자 (0 = 무료배송)</td><td class="ex">4000</td></tr>
+      <tr><td>발주마감 <span class="opt">선택</span></td><td><code>orderCutoff</code></td><td>문자</td><td class="ex">당일 14시</td></tr>
+      <tr><td>유통기한 <span class="opt">선택</span></td><td><code>shelfLife</code></td><td>문자</td><td class="ex">냉동 12개월</td></tr>
+      <tr><td>사진 <span class="opt">선택</span></td><td><code>image</code></td><td>파일명 또는 URL</td><td class="ex">images/전복.webp</td></tr>
+      <tr><td>비고 <span class="opt">선택</span></td><td><code>note</code></td><td>문자</td><td class="ex">산지직송</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout">🚚 <b>택배비는 창고 단위로 봅니다.</b> 합포장(합배송)이 같은 창고 상품끼리만 가능하기 때문에, 상품마다 창고명을 정확히 적어주시는 것이 가장 중요합니다.</div>
+</section>
+
+<section>
+  <h2><span class="no">02</span> 보내주시는 방법</h2>
+  <p class="desc">셋 중 편하신 방법 하나만 쓰시면 됩니다. 어느 쪽이든 결과는 같습니다.</p>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><div class="t"><b>등록 폼 사용 (가장 쉬움)</b>
+      <a href="vendor.html">상품 등록 폼</a>에서 상품을 입력하면 구매자 화면 미리보기가 바로 보이고, 다 넣으신 뒤 <b>표 형식 복사</b> 또는 <b>JSON 파일</b>로 내보내실 수 있습니다.</div></div>
+    <div class="step"><div class="n">2</div><div class="t"><b>엑셀 · 구글시트</b>
+      첫 줄에 위 항목 이름을 그대로 쓰고 아래로 상품을 채워주세요. 시트 링크를 보내주셔도 되고, 표를 복사해 카카오톡으로 붙여넣어 주셔도 됩니다.</div></div>
+    <div class="step"><div class="n">3</div><div class="t"><b>JSON 직접 전달</b>
+      시스템이 있는 업체라면 아래 형식으로 바로 주시면 됩니다. 사진은 파일을 따로 보내주시거나 접근 가능한 URL을 적어주세요.</div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="no">03</span> JSON 예시</h2>
+  <p class="desc">이 사이트가 실제로 읽고 있는 파일과 같은 형식입니다 — <a href="data/products.json">data/products.json</a></p>
+<pre>{
+ "updatedAt": "2026-08-08",
+ "supplier": "마스터 유통",
+ "products": [
+  {
+   "warehouse": "완전",
+   "category": "수산",
+   "name": "임금님 5-6미 전복 1kg",
+   "spec": ["1kg / 5-6미"],
+   "supplyPrice": 25500,
+   "previousPrice": null,
+   "tax": "면세",
+   "courier": "로젠택배/우체국택배",
+   "shipFee": 0,
+   "orderCutoff": "당일 15시",
+   "shelfLife": "냉동 12개월",
+   "image": "images/전복.webp",
+   "note": ""
+  }
+ ]
+}</pre>
+  <div class="callout">💡 <b>가격이 바뀐 상품</b>은 <code>previousPrice</code>에 이전 가격을 넣어주세요. 시세판에서 <b>▲인상 / ▼인하</b>가 금액·퍼센트와 함께 자동 표시됩니다.</div>
+</section>
+
+<footer>주식회사 마스터 · 외부유통팀<br>상품 · 수량 문의 <b>010-2455-4156 홍찬화 팀장</b></footer>
+</div></body></html>
