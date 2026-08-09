@@ -1,17 +1,28 @@
 <!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('mv_theme')==='light'?'light':'dark')}catch(e){}</script>
 <title>마스터 유통 상품 시세판</title>
 <style>
-/* 경매장 전광판 컨셉 — 단일 다크 테마로 확정. 뷰어 테마와 무관하게 전부 명시 도색. */
+/* 경매장 전광판 컨셉 — 어둡게/밝게 두 테마. 색상은 전부 변수로 빼서 [data-theme]로 스위치. */
 :root{
   --board:#15181c;--panel:#1b1f25;--panel-2:#20252c;--line:#2a3038;--line-2:#232830;
   --ink:#e9ecef;--steel:#8c98a6;--steel-2:#5f6b78;
   --amber:#e8a63f;--amber-dim:#8a6524;--up:#e2705a;--down:#5fa6dc;--green:#4fb98a;
 }
+:root[data-theme="light"]{
+  --board:#eef0f3;--panel:#ffffff;--panel-2:#f2f4f6;--line:#dde1e6;--line-2:#e8ebef;
+  --ink:#1b1f24;--steel:#5a6572;--steel-2:#8b95a1;
+  --amber:#b5720a;--amber-dim:#9c6a1f;--up:#c23616;--down:#1f6fb2;--green:#1f8f63;
+}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--board);color:var(--ink);
   font-family:-apple-system,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif;
-  line-height:1.45;padding-bottom:56px;-webkit-font-smoothing:antialiased}
+  line-height:1.45;padding-bottom:56px;-webkit-font-smoothing:antialiased;
+  transition:background-color .15s,color .15s}
+.themetoggle{position:fixed;top:14px;right:16px;z-index:80;width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+.themetoggle:hover{border-color:var(--amber)}
 .wrap{max-width:1800px;margin:0 auto;padding:0 28px}
 button{font-family:inherit}
 a{color:inherit}
@@ -29,7 +40,7 @@ a{color:inherit}
 .pinq{font-size:13.5px;color:var(--steel);font-weight:700}
 .mprice .pinq{font-size:16px}
 .editable{cursor:pointer;border-bottom:1.5px dashed var(--amber-dim);transition:.12s}
-.editable:hover{color:#fff;border-bottom-color:var(--amber)}
+.editable:hover{color:var(--ink);border-bottom-color:var(--amber)}
 .pedit{width:110px;font-size:15px;background:var(--panel);border:1.5px solid var(--amber);border-radius:6px;
   padding:3px 7px;color:var(--ink);font-variant-numeric:tabular-nums;font-family:inherit}
 .editedTag{font-size:9.5px;font-weight:800;color:#1a1408;background:var(--amber);border-radius:4px;
@@ -187,6 +198,7 @@ footer b{color:var(--steel)}
   display:flex;align-items:center;justify-content:center}
 .lightbox-close:hover{border-color:var(--amber);color:var(--amber)}
 </style></head><body>
+<button class="themetoggle" id="themeToggle" aria-label="테마 전환">🌙</button>
 <div class="adminbar" id="adminBar">🔓 <b>관리자 모드</b> — 실제 공급가가 보이고 있습니다 · 가격을 클릭하면 수정돼요 <button id="btnLock">잠그기</button></div>
 <div class="wrap">
 
@@ -306,6 +318,16 @@ const $=id=>document.getElementById(id);
 function won(n){return(n||0).toLocaleString('ko-KR');}
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function toast(m){const t=$('toast');t.textContent=m;t.style.opacity='1';setTimeout(()=>t.style.opacity='0',1800);}
+
+// ── 테마(밝게/어둡게) ── data-theme 속성은 <head>의 인라인 스크립트가 이미
+// localStorage 값으로 먼저 세팅해둔다(깜빡임 방지). 여기서는 토글 아이콘만 맞춘다.
+const THEME_KEY='mv_theme';
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem(THEME_KEY,t);
+  const b=$('themeToggle');if(b)b.textContent=t==='light'?'🌙':'☀️';
+}
+applyTheme(document.documentElement.getAttribute('data-theme')==='light'?'light':'dark');
 
 /* ─────────────────────────────────────────────────────────────
    관리자 모드 — 서버가 없는 정적 사이트라 "로그인"은 브라우저 안에서만
@@ -555,6 +577,10 @@ function render(){
     :'<div class="mempty">검색 결과가 없습니다.</div>';
 }
 document.addEventListener('click',e=>{
+  if(e.target.closest('#themeToggle')){
+    applyTheme(document.documentElement.getAttribute('data-theme')==='light'?'dark':'light');
+    return;
+  }
   const img=e.target.closest('.th,.mth');
   if(img){openLightbox(img);return;}
   if(e.target.id==='lightbox'||e.target.id==='lightboxClose'){closeLightbox();return;}
