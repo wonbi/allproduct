@@ -167,7 +167,7 @@ footer b{color:var(--steel)}
       <div class="ro down"><span class="v" id="roDown">—</span><span class="k">인하</span></div>
     </div>
   </div>
-  <div class="rule">🚚 <b>합포장(합배송)은 같은 창고 상품끼리만 됩니다.</b> 서로 다른 창고 상품은 배송비가 각각 붙어요. · 💬 상품 · 수량 문의 <b>010-2326-5911 박원비 팀장</b> · 카톡 <b>wonbi123</b> &nbsp;·&nbsp; <a href="vendor.html" style="color:var(--amber);font-weight:700">상품 등록 폼 ↗</a> &nbsp;·&nbsp; <a href="format.html" style="color:var(--amber);font-weight:700">데이터 형식 안내 ↗</a></div>
+  <div class="rule">🚚 <b>합포장(합배송)은 같은 창고 상품끼리만 됩니다.</b> 서로 다른 창고 상품은 배송비가 각각 붙어요. · 💬 상품 · 수량 문의 <b>010-2326-5911 박원비 팀장</b> · 카톡 <b>wonbi123</b></div>
 </div>
 
 <div class="load" id="load">⏳ 상품을 불러오는 중입니다…</div>
@@ -440,8 +440,7 @@ $('sorts').addEventListener('click',e=>{
     $('roDown').textContent=down;
     $('sub').textContent='기존 거래처 전용 · 실제 공급가 표시'+(DOC_META.updatedAt?' · '+DOC_META.updatedAt+' 기준':'');
     $('ft').innerHTML='마스터 유통 · 거래처 상품 시세판'
-      +(DOC_META.updatedAt?'<br>자료 기준일 <b>'+esc(DOC_META.updatedAt)+'</b>':'')
-      +' · <a href="vendor.html" style="color:var(--amber)">상품 등록 폼</a> · <a href="format.html" style="color:var(--amber)">데이터 형식 안내</a>';
+      +(DOC_META.updatedAt?'<br>자료 기준일 <b>'+esc(DOC_META.updatedAt)+'</b>':'');
     $('load').style.display='none';
     $('layout').style.display='grid';
     buildRail();render();
