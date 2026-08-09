@@ -17,6 +17,28 @@ button{font-family:inherit}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
+/* ── 관리자 모드 ── */
+.adminbar{display:none;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
+  background:var(--amber);color:#1a1408;font-size:12.5px;font-weight:700;padding:9px 16px;text-align:center}
+.adminbar b{font-weight:800}
+.adminbar button{border:1.5px solid #1a1408;background:transparent;color:#1a1408;border-radius:7px;
+  padding:4px 11px;font-size:11.5px;font-weight:800;cursor:pointer}
+.adminbar button:hover{background:#1a1408;color:var(--amber)}
+#adminLink{color:var(--steel-2);text-decoration:underline;cursor:pointer}
+#adminLink:hover{color:var(--steel)}
+.pinq{font-size:13.5px;color:var(--steel);font-weight:700}
+.mprice .pinq{font-size:16px}
+.editable{cursor:pointer;border-bottom:1.5px dashed var(--amber-dim);transition:.12s}
+.editable:hover{color:#fff;border-bottom-color:var(--amber)}
+.pedit{width:110px;font-size:15px;background:var(--panel);border:1.5px solid var(--amber);border-radius:6px;
+  padding:3px 7px;color:var(--ink);font-variant-numeric:tabular-nums;font-family:inherit}
+.editedTag{font-size:9.5px;font-weight:800;color:#1a1408;background:var(--amber);border-radius:4px;
+  padding:1px 5px;margin-left:6px;vertical-align:1px}
+.exportfab{display:none;position:fixed;right:18px;bottom:18px;z-index:70;background:var(--amber);color:#1a1408;
+  border:none;border-radius:24px;padding:13px 20px;font-weight:800;font-size:13px;cursor:pointer;
+  box-shadow:0 6px 22px rgba(0,0,0,.45);font-family:inherit}
+.exportfab:hover{background:#f0b862}
+
 /* ── 상단 전광판 ── */
 .board-top{border-bottom:1px solid var(--line);padding:20px 0 16px}
 .bt-row{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap}
@@ -153,6 +175,7 @@ footer b{color:var(--steel)}
   padding:9px 18px;border-radius:20px;font-size:12.5px;font-weight:700;opacity:0;transition:opacity .2s;
   pointer-events:none;z-index:99}
 </style></head><body>
+<div class="adminbar" id="adminBar">🔓 <b>관리자 모드</b> — 실제 공급가가 보이고 있습니다 · 가격을 클릭하면 수정돼요 <button id="btnLock">잠그기</button></div>
 <div class="wrap">
 
 <div class="board-top">
@@ -200,8 +223,9 @@ footer b{color:var(--steel)}
   </div>
 </div>
 
-<footer id="ft">마스터 유통 · 거래처 상품 시세판</footer>
+<footer id="ft">마스터 유통 · 거래처 상품 시세판 · <a href="#" id="adminLink">관리자</a></footer>
 </div>
+<button class="exportfab" id="exportBtn" style="display:none">⬇ 변경사항 내보내기</button>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -260,12 +284,79 @@ const CATRULES=[
 ];
 function catOf(n){for(const[c,re]of CATRULES){if(new RegExp(re).test(n))return c;}return'기타';}
 
-let GROUPS=[],MEDIA={};
+let GROUPS=[],MEDIA={},PBYID={},EDITCOUNT=0;
 const st={q:'',wi:0,sort:'sheet'};
 const $=id=>document.getElementById(id);
 function won(n){return(n||0).toLocaleString('ko-KR');}
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function toast(m){const t=$('toast');t.textContent=m;t.style.opacity='1';setTimeout(()=>t.style.opacity='0',1800);}
+
+/* ─────────────────────────────────────────────────────────────
+   관리자 모드 — 서버가 없는 정적 사이트라 "로그인"은 브라우저 안에서만
+   판단한다. 비밀번호를 평문으로 두지 않으려고 SHA-256 해시만 비교하지만,
+   이건 일반 방문자가 가격을 못 보게 가리는 용도지 소스를 볼 수 있는
+   사람까지 막는 진짜 보안은 아니다 — 그러려면 서버가 있어야 한다.
+   ───────────────────────────────────────────────────────────── */
+const ADMIN_HASH='af9465324f57a5e93d82346dfd555a1ecb8947c175eef2da2a26170b7817ddda';
+const ADMIN_KEY='mv_admin';
+function isAdmin(){return localStorage.getItem(ADMIN_KEY)==='1';}
+async function sha256Hex(str){
+  const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+async function tryUnlock(){
+  const pw=prompt('관리자 비밀번호를 입력하세요');
+  if(pw==null)return;
+  const h=await sha256Hex(pw);
+  if(h===ADMIN_HASH){
+    localStorage.setItem(ADMIN_KEY,'1');
+    toast('관리자 모드로 전환됐어요');
+    updateAdminUI();render();
+  }else{
+    toast('비밀번호가 올바르지 않습니다');
+  }
+}
+function lockAdmin(){
+  localStorage.removeItem(ADMIN_KEY);
+  toast('잠갔습니다 — 공급가가 다시 가려집니다');
+  updateAdminUI();render();
+}
+function updateAdminUI(){
+  const on=isAdmin();
+  $('adminBar').style.display=on?'flex':'none';
+  const link=$('adminLink');
+  if(link)link.textContent=on?'🔓 관리자 모드 (여기서 잠그기)':'관리자';
+  updateEditBadge();
+}
+function updateEditBadge(){
+  const b=$('exportBtn');
+  if(isAdmin()&&EDITCOUNT>0){b.style.display='inline-flex';b.textContent='⬇ 변경사항 내보내기 ('+EDITCOUNT+')';}
+  else{b.style.display='none';}
+}
+function buildExportJson(){
+  const products=[];
+  GROUPS.forEach(g=>g.products.forEach(p=>{
+    products.push({
+      warehouse:g.wh, sourceWarehouse:p.srcWh||'', category:p.cat0||p.cat||'',
+      name:p.name, spec:p.spec||[], supplyPrice:p.price.cur, previousPrice:p.price.old,
+      tax:p.tax||'', courier:p.courier||'', shipFee:p.ship||0, orderCutoff:p.cut||'',
+      shelfLife:p.exp||'', image:p.img||'', note:p.ref||''
+    });
+  }));
+  const d=new Date();
+  const today=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  return {updatedAt:today, supplier:(DOC_META&&DOC_META.supplier)||'마스터 유통', products};
+}
+function commitPriceEdit(id,rawVal){
+  const p=PBYID[id];if(!p)return;
+  const v=parseInt(String(rawVal).replace(/[^\d]/g,''),10);
+  if(isNaN(v)||v<0||v===p.price.cur){render();return;}
+  if(p.price.cur!=null)p.price.old=p.price.cur;
+  p.price.cur=v;
+  if(!p.__edited){p.__edited=true;EDITCOUNT++;}
+  updateEditBadge();
+  render();
+}
 
 // 원본 사진이 장당 0.3~1MB라 그대로 쓰면 거래처 휴대폰에서 느림 → 리사이즈 프록시로 썸네일.
 // 표 안 썸네일은 46×35라 훨씬 작게 받는다. 프록시가 죽으면 원본, 원본도 실패하면 빈 칸으로 단계 폴백.
@@ -287,11 +378,14 @@ function mediaOf(p){
   return {img:p.img||'',spec:p.spec||[],link:p.url||''};
 }
 function priceCell(p){
-  if(p.price.cur==null)return '<span class="pask">수량·단가 문의</span>';
+  if(!isAdmin())return '<span class="pinq">별도 문의</span>'+(p.__edited?'<span class="editedTag">수정됨</span>':'');
+  if(p.price.cur==null)return '<span class="pask editable" data-edit-price="'+p.id+'" title="클릭해서 가격 입력">수량·단가 문의</span>';
   const oldh=(p.price.old!=null&&p.price.old!==p.price.cur)?'<span class="pold">'+won(p.price.old)+'원</span>':'';
-  return oldh+'<span class="pcur">'+won(p.price.cur)+'<small>원</small></span>';
+  return oldh+'<span class="pcur editable" data-edit-price="'+p.id+'" title="클릭해서 가격 수정">'+won(p.price.cur)+'<small>원</small></span>'
+       +(p.__edited?'<span class="editedTag">수정됨</span>':'');
 }
 function changeCell(p){
+  if(!isAdmin())return '';
   const o=p.price.old,c=p.price.cur;
   if(o==null||c==null||o===c||o===0)return '<span class="chg flat">—</span>';
   const diff=c-o,pct=diff/o*100,dir=diff>0?'up':'down';
@@ -413,8 +507,42 @@ function render(){
     :'<div class="mempty">검색 결과가 없습니다.</div>';
 }
 document.addEventListener('click',e=>{
-  const b=e.target.closest('.cpbtn');if(!b)return;
-  navigator.clipboard.writeText(b.getAttribute('data-cp')).then(()=>toast('상품명 복사됨'));
+  const cp=e.target.closest('.cpbtn');
+  if(cp){navigator.clipboard.writeText(cp.getAttribute('data-cp')).then(()=>toast('상품명 복사됨'));return;}
+  const editEl=e.target.closest('[data-edit-price]');
+  if(editEl){
+    if(!isAdmin())return;
+    const id=editEl.getAttribute('data-edit-price');
+    const p=PBYID[id];if(!p)return;
+    const input=document.createElement('input');
+    input.type='text';input.inputMode='numeric';input.className='pedit';
+    input.value=p.price.cur!=null?p.price.cur:'';
+    input.setAttribute('data-pid',id);
+    editEl.replaceWith(input);
+    input.focus();input.select();
+    return;
+  }
+  if(e.target.id==='adminLink'){e.preventDefault();if(isAdmin())lockAdmin();else tryUnlock();return;}
+  if(e.target.id==='btnLock'){lockAdmin();return;}
+});
+document.addEventListener('focusout',e=>{
+  if(e.target.classList&&e.target.classList.contains('pedit')){
+    commitPriceEdit(e.target.getAttribute('data-pid'),e.target.value);
+  }
+});
+document.addEventListener('keydown',e=>{
+  if(e.target.classList&&e.target.classList.contains('pedit')){
+    if(e.key==='Enter')e.target.blur();
+    if(e.key==='Escape'){e.target.value='';e.target.blur();}
+  }
+});
+$('exportBtn').addEventListener('click',()=>{
+  const doc=buildExportJson();
+  const blob=new Blob([JSON.stringify(doc,null,1)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='products.json';
+  document.body.appendChild(a);a.click();a.remove();
+  toast('products.json 다운로드됨 — data/products.json에 덮어쓰고 커밋해주세요');
 });
 $('q').addEventListener('input',e=>{st.q=e.target.value.trim();render();});
 $('sorts').addEventListener('click',e=>{
@@ -426,7 +554,12 @@ $('sorts').addEventListener('click',e=>{
 (async()=>{
   try{
     GROUPS = await loadCatalog();
-    GROUPS.forEach(g=>g.products.forEach(p=>{ p.cat = p.cat0 || catOf(p.name); }));
+    let __pid=0;
+    GROUPS.forEach(g=>g.products.forEach(p=>{
+      p.cat = p.cat0 || catOf(p.name);
+      p.id = 'p'+(__pid++);
+      PBYID[p.id] = p;
+    }));
     let total=0,up=0,down=0;
     GROUPS.forEach(g=>g.products.forEach(p=>{
       total++;
@@ -441,9 +574,11 @@ $('sorts').addEventListener('click',e=>{
     $('sub').textContent='거래처 전용'+(DOC_META.updatedAt?' · '+DOC_META.updatedAt+' 기준':'');
     $('ft').innerHTML='마스터 유통 · 거래처 상품 시세판'
       +(DOC_META.updatedAt?'<br>자료 기준일 <b>'+esc(DOC_META.updatedAt)+'</b>':'')
-      +' · <a href="vendor.html" style="color:var(--amber)">상품 등록 폼</a> · <a href="format.html" style="color:var(--amber)">데이터 형식 안내</a>';
+      +' · <a href="vendor.html" style="color:var(--amber)">상품 등록 폼</a> · <a href="format.html" style="color:var(--amber)">데이터 형식 안내</a>'
+      +' · <a href="#" id="adminLink">관리자</a>';
     $('load').style.display='none';
     $('layout').style.display='grid';
+    updateAdminUI();
     buildRail();render();
   }catch(e){
     $('load').innerHTML='⚠️ 상품을 불러오지 못했습니다.<div class="err">'+esc(e.message||String(e))+'</div>'
