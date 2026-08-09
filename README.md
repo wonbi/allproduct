@@ -48,6 +48,26 @@ GitHub Pages가 자동 반영합니다 (보통 1~2분). 서비스계정·인증�
 
 필드 정의는 `format.html` 참조.
 
+### 유통시트 자동 동기화
+
+`scripts/sync-catalog.js`가 유통시트(baljuseo/catalog.html이 쓰는 것과 같은 시트)를 다시 읽어
+`data/products.json`을 통째로 새로 씁니다. **매일 한 번 자동으로 실행**되도록 예약되어 있고,
+화면 상단에 "마지막 동기화 YYYY-MM-DD HH:MM" 형식(한국시간)으로 표시됩니다.
+
+```
+node scripts/sync-catalog.js
+```
+
+이 스크립트는 인증키를 직접 갖고 있지 않습니다 — 실행할 때마다 `chanwha0221-cmyk/baljuseo`
+(공개 레포)의 `catalog.html`에서 읽기전용 서비스계정 정보를 그 자리에서 읽어 쓰고 버립니다.
+받아온 상품이 400개 미만이면(시트 구조가 바뀌었거나 오류) 실패 처리하고 기존
+`data/products.json`을 그대로 둡니다 — 절반만 받아온 데이터로 사이트를 깨뜨리지 않기 위함입니다.
+
+⚠️ **자동 동기화와 관리자 수동 수정은 같이 쓸 수 없습니다.** 동기화가 돌면 시트 내용으로
+`data/products.json`을 통째로 덮어쓰기 때문에, index.html 관리자 모드에서 고친 가격이 있어도
+다음 동기화 때 시트 값으로 되돌아갑니다. 특정 가격을 사이트에서만 다르게 유지하고 싶다면
+시트 자체를 고쳐야 합니다.
+
 ## GitHub Pages 설정 (최초 1회)
 
 레포 **Settings → Pages → Source: `Deploy from a branch`**, Branch를 `main` / `(root)`로

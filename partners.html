@@ -438,9 +438,9 @@ $('sorts').addEventListener('click',e=>{
     $('roWh').textContent=GROUPS.length;
     $('roUp').textContent=up;
     $('roDown').textContent=down;
-    $('sub').textContent='기존 거래처 전용 · 실제 공급가 표시'+(DOC_META.updatedAt?' · '+DOC_META.updatedAt+' 기준':'');
+    $('sub').textContent='기존 거래처 전용 · 실제 공급가 표시'+(DOC_META.updatedAt?' · 마지막 동기화 '+DOC_META.updatedAt:'');
     $('ft').innerHTML='마스터 유통 · 거래처 상품 시세판'
-      +(DOC_META.updatedAt?'<br>자료 기준일 <b>'+esc(DOC_META.updatedAt)+'</b>':'');
+      +(DOC_META.updatedAt?'<br>마지막 동기화 <b>'+esc(DOC_META.updatedAt)+'</b>':'');
     $('load').style.display='none';
     $('layout').style.display='grid';
     buildRail();render();

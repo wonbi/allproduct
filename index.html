@@ -343,9 +343,13 @@ function buildExportJson(){
       shelfLife:p.exp||'', image:p.img||'', note:p.ref||''
     });
   }));
-  const d=new Date();
-  const today=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-  return {updatedAt:today, supplier:(DOC_META&&DOC_META.supplier)||'마스터 유통', products};
+  return {updatedAt:kstStamp(), supplier:(DOC_META&&DOC_META.supplier)||'마스터 유통', products};
+}
+// 자동 동기화 스크립트(scripts/sync-catalog.js)와 같은 형식(KST, 분 단위)으로 시각을 남긴다.
+function kstStamp(){
+  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date());
+  const g=t=>parts.find(p=>p.type===t).value;
+  return g('year')+'-'+g('month')+'-'+g('day')+' '+g('hour')+':'+g('minute');
 }
 function commitPriceEdit(id,rawVal){
   const p=PBYID[id];if(!p)return;
@@ -571,9 +575,9 @@ $('sorts').addEventListener('click',e=>{
     $('roWh').textContent=GROUPS.length;
     $('roUp').textContent=up;
     $('roDown').textContent=down;
-    $('sub').textContent='거래처 전용'+(DOC_META.updatedAt?' · '+DOC_META.updatedAt+' 기준':'');
+    $('sub').textContent='거래처 전용'+(DOC_META.updatedAt?' · 마지막 동기화 '+DOC_META.updatedAt:'');
     $('ft').innerHTML='마스터 유통 · 거래처 상품 시세판'
-      +(DOC_META.updatedAt?'<br>자료 기준일 <b>'+esc(DOC_META.updatedAt)+'</b>':'')
+      +(DOC_META.updatedAt?'<br>마지막 동기화 <b>'+esc(DOC_META.updatedAt)+'</b>':'')
       +' · <a href="#" id="adminLink">관리자</a>';
     $('load').style.display='none';
     $('layout').style.display='grid';
