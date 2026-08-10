@@ -212,6 +212,7 @@ footer b{color:var(--steel)}
       <div class="ro"><span class="v" id="roWh">—</span><span class="k">창고</span></div>
       <div class="ro up"><span class="v" id="roUp">—</span><span class="k">인상</span></div>
       <div class="ro down"><span class="v" id="roDown">—</span><span class="k">인하</span></div>
+      <div class="ro" id="roViewsWrap" style="display:none"><span class="v" id="roViews">—</span><span class="k">조회수</span></div>
     </div>
   </div>
   <div class="rule">🚚 <b>합포장(합배송)은 같은 창고 상품끼리만 됩니다.</b> 서로 다른 창고 상품은 배송비가 각각 붙어요. · 💬 상품 · 수량 문의 <b>010-2326-5911 박원비 팀장</b> · 카톡 <b>wonbi123</b></div>
@@ -364,7 +365,21 @@ function updateAdminUI(){
   $('adminBar').style.display=on?'flex':'none';
   const link=$('adminLink');
   if(link)link.textContent=on?'🔓 관리자 모드 (여기서 잠그기)':'관리자';
+  $('roViewsWrap').style.display=on?'flex':'none';
   updateEditBadge();
+}
+
+/* ─────────────────────────────────────────────────────────────
+   조회수 — 서버가 없어서 무료 공개 카운터(countapi.xyz)를 씀. 페이지를 열 때마다
+   (관리자 여부와 무관하게) 1회 증가시키고, 숫자는 관리자 모드일 때만 보여준다.
+   카운터 서비스가 막혀 있으면(느리거나 다운) 조용히 "—"로 남긴다 — 페이지 동작엔 영향 없음.
+   ───────────────────────────────────────────────────────────── */
+async function bumpViewCounter(){
+  try{
+    const res=await fetch('https://api.countapi.xyz/hit/mv-allproduct-wonbi/index-views');
+    const d=await res.json();
+    if(d&&typeof d.value==='number')$('roViews').textContent=won(d.value);
+  }catch(e){ /* 카운터 실패는 무시 — 시세판 표시엔 영향 없음 */ }
 }
 function updateEditBadge(){
   const b=$('exportBtn');
@@ -630,6 +645,7 @@ $('sorts').addEventListener('click',e=>{
   $('sorts').querySelectorAll('.sortbtn').forEach(x=>x.classList.toggle('on',x===b));
   render();
 });
+bumpViewCounter();
 (async()=>{
   try{
     GROUPS = await loadCatalog();
