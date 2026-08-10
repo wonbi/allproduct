@@ -212,7 +212,10 @@ footer b{color:var(--steel)}
       <div class="ro"><span class="v" id="roWh">—</span><span class="k">창고</span></div>
       <div class="ro up"><span class="v" id="roUp">—</span><span class="k">인상</span></div>
       <div class="ro down"><span class="v" id="roDown">—</span><span class="k">인하</span></div>
-      <div class="ro" id="roViewsWrap" style="display:none"><span class="v" id="roViews">—</span><span class="k">조회수</span></div>
+      <div class="ro" id="roViewsWrap" style="display:none">
+        <img class="v" id="roViewsImg" alt="조회수" style="height:29px;width:auto;display:block">
+        <span class="k">조회수</span>
+      </div>
     </div>
   </div>
   <div class="rule">🚚 <b>합포장(합배송)은 같은 창고 상품끼리만 됩니다.</b> 서로 다른 창고 상품은 배송비가 각각 붙어요. · 💬 상품 · 수량 문의 카톡 <b>wonbi123</b></div>
@@ -370,16 +373,17 @@ function updateAdminUI(){
 }
 
 /* ─────────────────────────────────────────────────────────────
-   조회수 — 서버가 없어서 무료 공개 카운터(countapi.xyz)를 씀. 페이지를 열 때마다
-   (관리자 여부와 무관하게) 1회 증가시키고, 숫자는 관리자 모드일 때만 보여준다.
-   카운터 서비스가 막혀 있으면(느리거나 다운) 조용히 "—"로 남긴다 — 페이지 동작엔 영향 없음.
+   조회수 — 서버가 없어서 무료 뱃지 카운터(visitor-badge.laobi.icu, Cloudflare
+   Workers 기반)를 씀. countapi.xyz는 서비스 자체가 죽어서 교체함(카운트 0으로 재시작).
+   뱃지 이미지 자체가 숫자를 그려서 주기 때문에 fetch·JSON 파싱이 필요 없다 — 이미지 로드
+   자체가 곧 "1회 조회 기록"이라 페이지를 열 때마다(관리자 여부와 무관하게) 자동 집계되고,
+   관리자 모드일 때만 그 뱃지를 보여준다. 뱃지 로드에 실패하면 통계칸 자체를 숨긴다.
    ───────────────────────────────────────────────────────────── */
-async function bumpViewCounter(){
-  try{
-    const res=await fetch('https://api.countapi.xyz/hit/mv-allproduct-wonbi/index-views');
-    const d=await res.json();
-    if(d&&typeof d.value==='number')$('roViews').textContent=won(d.value);
-  }catch(e){ /* 카운터 실패는 무시 — 시세판 표시엔 영향 없음 */ }
+function bumpViewCounter(){
+  const img=$('roViewsImg');
+  if(!img)return;
+  img.onerror=()=>{ $('roViewsWrap').style.display='none'; };
+  img.src='https://visitor-badge.laobi.icu/badge?page_id=wonbi-allproduct-index-v2&color=b5720a';
 }
 function updateEditBadge(){
   const b=$('exportBtn');
