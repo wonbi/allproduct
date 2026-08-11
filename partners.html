@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('mv_theme')==='dark'?'dark':'light')}catch(e){}</script>
-<title>마스터 유통 상품 시세판 · 거래처용</title>
+<title>마스터 유통 상품 카탈로그 · 거래처용</title>
 <style>
 /* 경매장 전광판 컨셉 — 어둡게/밝게 두 테마. 색상은 전부 변수로 빼서 [data-theme]로 스위치. */
 :root{
@@ -182,7 +182,7 @@ footer b{color:var(--steel)}
 <div class="board-top">
   <div class="bt-row">
     <div class="bt-title"><span class="dot"></span>
-      <div><h1>마스터 유통 상품 시세판</h1><div class="bt-sub" id="sub">기존 거래처 전용 · 실제 공급가 표시 · 불러오는 중…</div></div>
+      <div><h1>마스터 유통 상품 카탈로그</h1><div class="bt-sub" id="sub">기존 거래처 전용 · 실제 공급가 표시 · 불러오는 중…</div></div>
     </div>
     <div class="readout">
       <div class="ro"><span class="v" id="roItems">—</span><span class="k">취급 품목</span></div>
@@ -224,7 +224,7 @@ footer b{color:var(--steel)}
   </div>
 </div>
 
-<footer id="ft">마스터 유통 · 거래처 상품 시세판</footer>
+<footer id="ft">마스터 유통 · 거래처 상품 카탈로그</footer>
 </div>
 <div class="toast" id="toast"></div>
 <div class="lightbox" id="lightbox">
@@ -515,7 +515,7 @@ $('sorts').addEventListener('click',e=>{
     $('roUp').textContent=up;
     $('roDown').textContent=down;
     $('sub').textContent='기존 거래처 전용 · 실제 공급가 표시'+(DOC_META.updatedAt?' · 마지막 동기화 '+DOC_META.updatedAt:'');
-    $('ft').innerHTML='마스터 유통 · 거래처 상품 시세판'
+    $('ft').innerHTML='마스터 유통 · 거래처 상품 카탈로그'
       +(DOC_META.updatedAt?'<br>마지막 동기화 <b>'+esc(DOC_META.updatedAt)+'</b>':'');
     $('load').style.display='none';
     $('layout').style.display='grid';
