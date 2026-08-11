@@ -39,7 +39,6 @@ h1{font-size:27px;font-weight:800;letter-spacing:-.4px}
 .ro{display:flex;flex-direction:column;gap:4px}
 .ro .v{font-size:29px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.4px;line-height:1}
 .ro .k{font-size:11px;color:var(--steel-2);letter-spacing:.09em}
-.ro.amber .v{color:var(--amber)}.ro.up .v{color:var(--up)}.ro.down .v{color:var(--down)}
 
 .rule{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--amber);
   border-radius:8px;padding:12px 16px;font-size:13px;color:var(--steel);line-height:1.7}
@@ -187,8 +186,6 @@ footer b{color:var(--steel)}
     <div class="readout">
       <div class="ro"><span class="v" id="roItems">—</span><span class="k">취급 품목</span></div>
       <div class="ro"><span class="v" id="roWh">—</span><span class="k">창고</span></div>
-      <div class="ro up"><span class="v" id="roUp">—</span><span class="k">인상</span></div>
-      <div class="ro down"><span class="v" id="roDown">—</span><span class="k">인하</span></div>
     </div>
   </div>
   <div class="rule">🚚 <b>합포장(합배송)은 같은 창고 상품끼리만 됩니다.</b> 서로 다른 창고 상품은 배송비가 각각 붙어요. · 💬 상품 · 수량 문의 <b>010-2326-5911 박원비 팀장</b> · 카톡 <b>wonbi123</b> · 메일 <b>feellost@naver.com</b></div>
@@ -503,17 +500,10 @@ $('sorts').addEventListener('click',e=>{
   try{
     GROUPS = await loadCatalog();
     GROUPS.forEach(g=>g.products.forEach(p=>{ p.cat = p.cat0 || catOf(p.name); }));
-    let total=0,up=0,down=0;
-    GROUPS.forEach(g=>g.products.forEach(p=>{
-      total++;
-      if(p.price.old!=null&&p.price.cur!=null){
-        if(p.price.cur>p.price.old)up++; else if(p.price.cur<p.price.old)down++;
-      }
-    }));
+    let total=0;
+    GROUPS.forEach(g=>g.products.forEach(p=>{ total++; }));
     $('roItems').textContent=won(total);
     $('roWh').textContent=GROUPS.length;
-    $('roUp').textContent=up;
-    $('roDown').textContent=down;
     $('sub').textContent='기존 거래처 전용 · 실제 공급가 표시'+(DOC_META.updatedAt?' · 마지막 동기화 '+DOC_META.updatedAt:'');
     $('ft').innerHTML='마스터 유통 · 거래처 상품 카탈로그'
       +(DOC_META.updatedAt?'<br>마지막 동기화 <b>'+esc(DOC_META.updatedAt)+'</b>':'');
