@@ -216,9 +216,13 @@ footer b{color:var(--steel)}
     <div class="readout">
       <div class="ro"><span class="v" id="roItems">—</span><span class="k">취급 품목</span></div>
       <div class="ro"><span class="v" id="roWh">—</span><span class="k">창고</span></div>
-      <div class="ro" id="roViewsWrap" style="display:none">
-        <img class="v" id="roViewsImg" alt="조회수" style="height:29px;width:auto;display:block">
-        <span class="k">조회수</span>
+      <div class="ro adminstat" id="roViewsTodayWrap" style="display:none">
+        <img class="v" id="roViewsTodayImg" alt="오늘 조회" style="height:29px;width:auto;display:block">
+        <span class="k">오늘 조회</span>
+      </div>
+      <div class="ro adminstat" id="roViewsWrap" style="display:none">
+        <img class="v" id="roViewsImg" alt="누적 조회" style="height:29px;width:auto;display:block">
+        <span class="k">누적 조회</span>
       </div>
     </div>
   </div>
@@ -378,22 +382,35 @@ function updateAdminUI(){
   $('adminBar').style.display=on?'flex':'none';
   const link=$('adminLink');
   if(link)link.textContent=on?'🔓 관리자 모드 (여기서 잠그기)':'관리자';
-  $('roViewsWrap').style.display=on?'flex':'none';
+  document.querySelectorAll('.adminstat').forEach(el=>{el.style.display=on?'flex':'none';});
   updateEditBadge();
 }
 
 /* ─────────────────────────────────────────────────────────────
    조회수 — 서버가 없어서 무료 뱃지 카운터(visitor-badge.laobi.icu, Cloudflare
-   Workers 기반)를 씀. countapi.xyz는 서비스 자체가 죽어서 교체함(카운트 0으로 재시작).
-   뱃지 이미지 자체가 숫자를 그려서 주기 때문에 fetch·JSON 파싱이 필요 없다 — 이미지 로드
-   자체가 곧 "1회 조회 기록"이라 페이지를 열 때마다(관리자 여부와 무관하게) 자동 집계되고,
-   관리자 모드일 때만 그 뱃지를 보여준다. 뱃지 로드에 실패하면 통계칸 자체를 숨긴다.
+   Workers 기반)를 씀. 뱃지 이미지 자체가 숫자를 그려서 주기 때문에 fetch·JSON 파싱이
+   필요 없다 — 이미지 로드 자체가 곧 "1회 조회 기록"이라 페이지를 열 때마다(관리자
+   여부와 무관하게) 자동 집계되고, 관리자 모드일 때만 뱃지를 보여준다.
+   누적 카운터 하나만 있으면 숫자만 봐선 오늘 온 건지 옛날부터 쌓인 건지 구분이
+   안 되니, 날짜별로 키가 바뀌는 카운터를 하나 더 둬서 "오늘 조회"를 따로 잡는다
+   (자정 지나면 자연히 새 카운터로 바뀌어 0부터 다시 시작 — 별도 리셋 로직 불필요).
+   뱃지 로드에 실패하면 해당 통계칸만 숨긴다.
    ───────────────────────────────────────────────────────────── */
+function kstDateKey(){
+  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+  const g=t=>parts.find(p=>p.type===t).value;
+  return g('year')+g('month')+g('day');
+}
 function bumpViewCounter(){
-  const img=$('roViewsImg');
-  if(!img)return;
-  img.onerror=()=>{ $('roViewsWrap').style.display='none'; };
-  img.src='https://visitor-badge.laobi.icu/badge?page_id=wonbi-allproduct-index-v2&color=b5720a';
+  const total=$('roViewsImg'), today=$('roViewsTodayImg');
+  if(total){
+    total.onerror=()=>{ $('roViewsWrap').style.display='none'; };
+    total.src='https://visitor-badge.laobi.icu/badge?page_id=wonbi-allproduct-index-v2&color=b5720a';
+  }
+  if(today){
+    today.onerror=()=>{ $('roViewsTodayWrap').style.display='none'; };
+    today.src='https://visitor-badge.laobi.icu/badge?page_id=wonbi-allproduct-index-daily-'+kstDateKey()+'&color=1f8f63';
+  }
 }
 function updateEditBadge(){
   const b=$('exportBtn');
