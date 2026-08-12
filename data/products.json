@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-08-11 10:43",
+ "updatedAt": "2026-08-12 10:55",
  "supplier": "마스터 유통",
  "products": [
   {
@@ -3292,28 +3292,6 @@
    "warehouse": "인천",
    "sourceWarehouse": "",
    "category": "",
-   "name": "연안 모시 1kg",
-   "spec": [
-    "※ 구성 : 활 모시",
-    "※ 중량/ 사이즈 : 1kg / 30미내외",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 모시 100%",
-    "※ 포장방식 : 비닐실링"
-   ],
-   "supplyPrice": 9000,
-   "previousPrice": null,
-   "tax": "면세",
-   "courier": "우체국택배",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "-",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/687/689/006/3f3a5dfd6bc2be50e944fad4c6e94dbc.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "인천",
-   "sourceWarehouse": "",
-   "category": "",
    "name": "연안 조개찜 1세트",
    "spec": [
     "※ 구성 : 키조개, 대왕가리비, 대합, 참소라, 백상합, 홍합, 칼국수 생면, 구이용 호일 2매",
@@ -3396,6 +3374,29 @@
    "orderCutoff": "연장마감 : 16시",
    "shelfLife": "-",
    "image": "https://masterc.co.kr/files/attach/images/8333658/639/689/006/b55d89f289818dfcb1882c7882b8110f.jpg",
+   "note": ""
+  },
+  {
+   "warehouse": "동해",
+   "sourceWarehouse": "",
+   "category": "",
+   "name": "맛도리 알폭탄 알탕 한팩",
+   "spec": [
+    "※ 구성 : 국내산 대구 400g, 명란 250g, 고니 250g, 소스 2팩",
+    "※ 중량/ 사이즈 :  국내산 대구 400g, 명란 250g+고니 250g, 소스 2팩",
+    "※ 생물여부 : 냉동",
+    "※ 성분표시 :",
+    "※ 포장방식 : 비닐실링",
+    "※ 특이사항 : 명란이랑 곤이는 한 팩에 동봉되어 있습니다."
+   ],
+   "supplyPrice": 8500,
+   "previousPrice": null,
+   "tax": "면세",
+   "courier": "씨제이대한통운",
+   "shipFee": 4000,
+   "orderCutoff": "연장마감 : 16시",
+   "shelfLife": "-",
+   "image": "https://masterc.co.kr/files/attach/images/8333658/061/348/025/033b520142764e239ee0f607db040a72.png",
    "note": ""
   },
   {
@@ -4451,22 +4452,6 @@
    "warehouse": "충무",
    "sourceWarehouse": "",
    "category": "",
-   "name": "통통 급냉 고등어 1kg",
-   "spec": [],
-   "supplyPrice": 6300,
-   "previousPrice": null,
-   "tax": "면세",
-   "courier": "씨제이대한통운/롯데택배",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "-",
-   "image": "",
-   "note": ""
-  },
-  {
-   "warehouse": "충무",
-   "sourceWarehouse": "",
-   "category": "",
    "name": "통통 다듬이 홍합 2kg",
    "spec": [
     "※ 구성 : 다듬이 홍합",
@@ -5352,6 +5337,29 @@
    "warehouse": "하남",
    "sourceWarehouse": "",
    "category": "",
+   "name": "맛상 담양 한돈 너비아니 450g",
+   "spec": [
+    "※ 구성 : 한돈 너비아니 450g",
+    "※ 중량/사이즈 : 400g (4EA) + 소스(50g)",
+    "※ 생물여부 : 냉동",
+    "※ 성분표시 : 돼지고기(국내산)80%, 양파(국내산)5%, 대파(국내산)5%, 마늘(국내산)3%, 간장 2%, 빵가루, 물엿, 설탕, 찹쌀가루, 참깨, 치자적색소(천연식용색소)",
+    "※ 포장방식 : PE포장",
+    "※ 기타 : -18˚C 이하 냉동보관"
+   ],
+   "supplyPrice": 5500,
+   "previousPrice": null,
+   "tax": "과세",
+   "courier": "롯데택배",
+   "shipFee": 4000,
+   "orderCutoff": "연장마감 : 16시",
+   "shelfLife": "",
+   "image": "https://masterc.co.kr/files/attach/images/8333658/395/394/008/71e91f801e780b712a24fc836739fb22.jpg",
+   "note": ""
+  },
+  {
+   "warehouse": "하남",
+   "sourceWarehouse": "",
+   "category": "",
    "name": "맛상 삐카돈까스 1kg",
    "spec": [
     "※ 구성 : 맛상 삐카돈까스",
@@ -5967,28 +5975,6 @@
    "shelfLife": "-",
    "image": "https://masterc.co.kr/files/attach/images/8333658/067/215/024/11f0f7b0628d34e0292f83f1ada40148.jpg",
    "note": "- 상품명 : 당일도축 뭉티기 200g > 당일도축 뭉티기 180g\r\n- 중량 : 200g > 180g\n- 특이사항 : 여름철 기온 상승으로 인한 품질 우려로 제주 및 도서산간 발송 불가합니다."
-  },
-  {
-   "warehouse": "김포",
-   "sourceWarehouse": "",
-   "category": "",
-   "name": "고추장 오리주물럭 300g",
-   "spec": [
-    "※ 구성 : 고추장 오리주물럭 1팩",
-    "※ 중량 / 사이즈 : 300g",
-    "※ 생물여부 : 냉동",
-    "※ 성분표시 : 오리고기 70%(국내산),오리고추장양념JK[물엿,정제 수,혼합간장{탈지대두(인도산),천일염(호주산)},양파(국내산),배퓨레(배(국산),비타민C},설탕,고추장 4%{소맥분(밀:미국산,호주산),고추양념(중국산)}",
-    "※ 포장방식 : 진공포장"
-   ],
-   "supplyPrice": 5500,
-   "previousPrice": null,
-   "tax": "과세",
-   "courier": "씨제이대한통운",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "27-02-02",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/123/884/006/1c8905416a10c2ef666582fba941333a.jpg",
-   "note": ""
   },
   {
    "warehouse": "김포",
@@ -8222,6 +8208,29 @@
   },
   {
    "warehouse": "단독(유)",
+   "sourceWarehouse": "이성",
+   "category": "",
+   "name": "왕 바지락 1kg",
+   "spec": [
+    "※ 구성 : 바지락",
+    "※ 중량/ 사이즈 : 1kg 내외 / 50-55미 내외",
+    "※ 생물여부 : 생물",
+    "※ 성분표시 : 바지락 100%",
+    "※ 포장방식 : 비닐포장",
+    "※ 특이사항 : 생물 수분감량 10-20% 쯤 있음."
+   ],
+   "supplyPrice": 4000,
+   "previousPrice": null,
+   "tax": "면세",
+   "courier": "씨제이대한통운",
+   "shipFee": 4000,
+   "orderCutoff": "연장마감 : 16시",
+   "shelfLife": "-",
+   "image": "https://masterc.co.kr/files/attach/images/8333658/363/952/023/57f890eb9126c100b70a8ce00d9d0150.jpg",
+   "note": "- 스펙 : 50~55미내외 > 70미내외"
+  },
+  {
+   "warehouse": "단독(유)",
    "sourceWarehouse": "푸카",
    "category": "",
    "name": "찐 불향 오징어제육볶음 300g",
@@ -8467,50 +8476,6 @@
   },
   {
    "warehouse": "단독(유)",
-   "sourceWarehouse": "푸카",
-   "category": "",
-   "name": "찐 불향 쭈꾸미볶음 순한맛 300g",
-   "spec": [
-    "※ 구성 : 쭈꾸미볶음 300g 1팩 순한맛",
-    "※ 중량/ 사이즈 : 쭈꾸미 200g 내외, 양념 100g 내외",
-    "※ 생물여부 : 냉동",
-    "※ 성분표시 : 쭈꾸미(베트남69%),고추장(혼합양념,(밀:미국,호주),물엿)설탕,L-글루타민,볶은참깨,후추가루,마늘,참기름,향미유(채종유(유채또는카놀라유),고춧가루:중국산,마늘)",
-    "※ 포장방식 : 비닐실링"
-   ],
-   "supplyPrice": 7000,
-   "previousPrice": null,
-   "tax": "과세",
-   "courier": "로젠택배",
-   "shipFee": 4000,
-   "orderCutoff": "오후마감 : 12시",
-   "shelfLife": "-",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/851/337/025/02599b2a8e2797fcc338462bff4ffa41.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "단독(유)",
-   "sourceWarehouse": "푸카",
-   "category": "",
-   "name": "찐 불향 쭈꾸미볶음 매운맛 300g",
-   "spec": [
-    "※ 구성 : 쭈꾸미볶음 300g 1팩 매운맛",
-    "※ 중량/ 사이즈 : 쭈꾸미 200g 내외, 양념 100g 내외",
-    "※ 생물여부 : 냉동",
-    "※ 성분표시 : 쭈꾸미(베트남69%),고추장(혼합양념,(밀:미국,호주),물엿)설탕,L-글루타민,볶은참깨,후추가루,마늘,참기름,향미유(채종유(유채또는카놀라유),고춧가루:중국산,마늘)",
-    "※ 포장방식 : 비닐실링"
-   ],
-   "supplyPrice": 7000,
-   "previousPrice": null,
-   "tax": "과세",
-   "courier": "로젠택배",
-   "shipFee": 4000,
-   "orderCutoff": "오후마감 : 12시",
-   "shelfLife": "-",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/874/337/025/d21dbe74887af8017a1b84a2c0ef8a83.jpg",
-   "note": "찐 불향 쭈꾸미볶음 300g > 찐 불향 쭈꾸미볶음 매운맛 300g"
-  },
-  {
-   "warehouse": "단독(유)",
    "sourceWarehouse": "김치",
    "category": "",
    "name": "열무김치 2kg",
@@ -8596,29 +8561,6 @@
    "shelfLife": "-",
    "image": "https://masterc.co.kr/files/attach/images/8333658/048/674/024/e7314ca15782deb7ad9e1ebf3a7d91d4.jpg",
    "note": "- 마감시간 : 16시 > 14시"
-  },
-  {
-   "warehouse": "단독(유)",
-   "sourceWarehouse": "이성",
-   "category": "",
-   "name": "왕 바지락 1kg",
-   "spec": [
-    "※ 구성 : 바지락",
-    "※ 중량/ 사이즈 : 1kg 내외 / 50-55미 내외",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 바지락 100%",
-    "※ 포장방식 : 비닐포장",
-    "※ 특이사항 : 생물 수분감량 10-20% 쯤 있음."
-   ],
-   "supplyPrice": 5000,
-   "previousPrice": null,
-   "tax": "면세",
-   "courier": "씨제이대한통운",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/363/952/023/57f890eb9126c100b70a8ce00d9d0150.jpg",
-   "note": "- 미수 : 65미 내외 > 50-55미 내외"
   },
   {
    "warehouse": "단독(유)",
@@ -9292,29 +9234,6 @@
   },
   {
    "warehouse": "단독(유)",
-   "sourceWarehouse": "이성",
-   "category": "",
-   "name": "왕 바지락 1kg",
-   "spec": [
-    "※ 구성 : 바지락",
-    "※ 중량/ 사이즈 : 1kg 내외 / 50-55미 내외",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 바지락 100%",
-    "※ 포장방식 : 비닐포장",
-    "※ 특이사항 : 생물 수분감량 10-20% 쯤 있음."
-   ],
-   "supplyPrice": 4000,
-   "previousPrice": 5000,
-   "tax": "면세",
-   "courier": "씨제이대한통운",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "-",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/363/952/023/57f890eb9126c100b70a8ce00d9d0150.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "단독(유)",
    "sourceWarehouse": "킹대",
    "category": "",
    "name": "깔끔 깐대하 500g",
@@ -9825,50 +9744,6 @@
    "orderCutoff": "연장마감: 16시",
    "shelfLife": "2026-04-03",
    "image": "https://masterc.co.kr/files/attach/images/8333658/211/583/022/ab70231901d0898e3c8bf0dd60866e39.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "단독(유)",
-   "sourceWarehouse": "버피",
-   "category": "",
-   "name": "버터 피데기 750g급",
-   "spec": [
-    "※ 구성 : 반건조오징어 750g급, 버터, 초장",
-    "※ 중량/ 사이즈 : 750g 내외 / 5미",
-    "※ 생물여부 : 냉동",
-    "※ 성분표시 : 반건조오징어 100%",
-    "※ 포장방식 : 진공포장"
-   ],
-   "supplyPrice": 16100,
-   "previousPrice": 15800,
-   "tax": "면세",
-   "courier": "로젠택배",
-   "shipFee": 4000,
-   "orderCutoff": "오후마감 : 14시",
-   "shelfLife": "-",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/849/278/023/649a08f1ffeab620ce274fb718b7225c.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "단독(유)",
-   "sourceWarehouse": "버피",
-   "category": "",
-   "name": "총알한치 500g",
-   "spec": [
-    "※ 구성 : 한치 500g",
-    "※ 중량/ 사이즈 : 한치 500g 1팩 / 15-30미 내외",
-    "※ 생물여부 : 냉동",
-    "※ 성분표시 : 한치 100%",
-    "※ 포장방식 : 진공포장"
-   ],
-   "supplyPrice": 4200,
-   "previousPrice": null,
-   "tax": "면세",
-   "courier": "로젠택배",
-   "shipFee": 4000,
-   "orderCutoff": "오후마감 : 14시",
-   "shelfLife": "",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/382/341/023/981bed88e7cccd5274c5774c0d4a8d14.jpg",
    "note": ""
   },
   {
@@ -10966,11 +10841,11 @@
    "category": "",
    "name": "손질 반건조 열기 1kg",
    "spec": [
-    "※ 구성 :  열기 1kg",
-    "※ 중량/사이즈 :  1팩 2마리 200g 내외 / 총 5팩",
-    "※ 생물여부 : 냉동",
-    "※ 성분표시 :  열기 100%",
-    "※ 포장방식 :  진공포장"
+    "※ 구성 :  열기 1kg",
+    "※ 중량/사이즈 :  1팩 2마리 200g 내외 / 총 5팩",
+    "※ 생물여부 : 냉동",
+    "※ 성분표시 :  열기 100%",
+    "※ 포장방식 :  진공포장"
    ],
    "supplyPrice": 20500,
    "previousPrice": null,
