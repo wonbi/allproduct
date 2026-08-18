@@ -1,7 +1,163 @@
 {
- "updatedAt": "2026-08-17 10:14",
+ "updatedAt": "2026-08-18 10:11",
  "supplier": "마스터 유통",
  "products": [
+  {
+   "warehouse": "당일생물",
+   "sourceWarehouse": "인천",
+   "category": "",
+   "name": "연안 연평참소라 1kg",
+   "spec": [
+    "※ 구성 : 참소라 1kg",
+    "※ 중량/ 사이즈 : 1kg/20미 내외",
+    "※ 생물여부 : 생물",
+    "※ 성분표시 : 참소라 100%",
+    "※ 포장방식 : 비닐실링"
+   ],
+   "supplyPrice": 8500,
+   "previousPrice": 5000,
+   "tax": "면세",
+   "courier": "우체국택배",
+   "shipFee": 4000,
+   "orderCutoff": "연장마감 : 16시",
+   "shelfLife": "",
+   "image": "https://masterc.co.kr/files/attach/images/8333658/267/691/006/d42945ad5a6024e37397a5275f1a2545.jpg",
+   "note": ""
+  },
+  {
+   "warehouse": "당일생물",
+   "sourceWarehouse": "인천",
+   "category": "",
+   "name": "연안 주먹참소라 1kg",
+   "spec": [
+    "※ 구성 : 참소라 1kg",
+    "※ 중량/ 사이즈 : 1kg/4-8미",
+    "※ 생물여부 : 생물",
+    "※ 성분표시 : 참소라 100%",
+    "※ 포장방식 : 비닐실링",
+    "※ 기타 : 자연산이라 크기차이가 있습니다."
+   ],
+   "supplyPrice": 15000,
+   "previousPrice": 9000,
+   "tax": "면세",
+   "courier": "우체국택배",
+   "shipFee": 4000,
+   "orderCutoff": "연장마감 : 16시",
+   "shelfLife": "",
+   "image": "https://masterc.co.kr/files/attach/images/8333658/319/691/006/6d705d678c33a8fab4c920558389a92e.jpg",
+   "note": ""
+  },
+  {
+   "warehouse": "당일생물",
+   "sourceWarehouse": "인천",
+   "category": "",
+   "name": "연안 꼬마 참소라 1kg",
+   "spec": [
+    "※ 구성 :  참소라 1kg",
+    "※ 중량/사이즈 :  1kg/30~50미 내외",
+    "※ 생물여부 : 생물",
+    "※ 성분표시 :  참소라 100%",
+    "※ 포장방식 : 비닐포장"
+   ],
+   "supplyPrice": 6500,
+   "previousPrice": 4500,
+   "tax": "면세",
+   "courier": "우체국택배",
+   "shipFee": 4000,
+   "orderCutoff": "연장마감 : 16시",
+   "shelfLife": "",
+   "image": "https://masterc.co.kr/files/attach/images/8333658/881/203/025/0407da2e43666349920543133142cb3a.jpg",
+   "note": ""
+  },
+  {
+   "warehouse": "당일생물",
+   "sourceWarehouse": "동해",
+   "category": "",
+   "name": "동해 활 골뱅이 1kg",
+   "spec": [
+    "※ 구성 : 생물 골뱅이",
+    "※ 중량/사이즈 : 1kg / 35-50미",
+    "※ 생물여부 : 생물",
+    "※ 성분표시 : 흑고동 100%",
+    "※ 포장방식 : 비닐포장"
+   ],
+   "supplyPrice": 4500,
+   "previousPrice": 3000,
+   "tax": "면세",
+   "courier": "씨제이대한통운",
+   "shipFee": 4000,
+   "orderCutoff": "연장마감 : 16시",
+   "shelfLife": "",
+   "image": "https://masterc.co.kr/files/attach/images/8333658/651/724/024/8a2d463fa6bf45ae511849fc8dd21390.jpg",
+   "note": ""
+  },
+  {
+   "warehouse": "당일생물",
+   "sourceWarehouse": "북구",
+   "category": "",
+   "name": "1등급 한상모듬 1kg",
+   "spec": [
+    "※ 구성 : 꽃등심 / 채끝 / 꽃갈비 / 살치살 / 허브솔트 2개",
+    "※ 중량/사이즈 :",
+    "※ 생물여부 : 냉장",
+    "※ 성분표시 : 소고기 100% / 육우",
+    "※ 포장방식 :  스킨포장"
+   ],
+   "supplyPrice": 51000,
+   "previousPrice": 48000,
+   "tax": "면세",
+   "courier": "씨제이대한통운",
+   "shipFee": 4000,
+   "orderCutoff": "연장마감 : 16시",
+   "shelfLife": "",
+   "image": "https://masterc.co.kr/files/attach/images/8333658/697/360/012/9a143df1b151d35c6b1c58348e5163a6.jpg",
+   "note": ""
+  },
+  {
+   "warehouse": "당일생물",
+   "sourceWarehouse": "충무",
+   "category": "",
+   "name": "통통 돌문어 1kg",
+   "spec": [
+    "※ 구성 : 돌문어",
+    "※ 중량/ 사이즈 : 1kg 1-4미 내외(중량우선)",
+    "※ 생물여부 : 생물",
+    "※ 성분표시 : 돌문어 100%",
+    "※ 포장방식 : 아이스팩, 빙장포장, 비닐포장. 소분/대분 랜덤.",
+    "※ 특이사항 : 생물 수분 감량 1-20%"
+   ],
+   "supplyPrice": 17000,
+   "previousPrice": 17500,
+   "tax": "면세",
+   "courier": "씨제이대한통운/롯데택배",
+   "shipFee": 4000,
+   "orderCutoff": "연장마감 : 16시",
+   "shelfLife": "",
+   "image": "https://masterc.co.kr/files/attach/images/8333658/952/486/022/eea741fc7e3228232f449b510e9a9bce.jpg",
+   "note": ""
+  },
+  {
+   "warehouse": "당일생물",
+   "sourceWarehouse": "야수",
+   "category": "",
+   "name": "숙성 민어회 300g",
+   "spec": [
+    "※ 구성 : 숙성 민어회[뱃살, 등살, 지느러미, 꼬리살, 삼각살, 부레] / 초장 1팩",
+    "※ 중량/ 사이즈 : 300g / 원물 5-6kg(수컷)",
+    "※ 생물여부 : 생물",
+    "※ 성분표시 : 민어 100%[국내산(신안)]",
+    "※ 포장방식 : 아이스박스 + 비닐포장"
+   ],
+   "supplyPrice": 19500,
+   "previousPrice": 23000,
+   "tax": "면세",
+   "courier": "로젠택배",
+   "shipFee": 4000,
+   "orderCutoff": "연장마감 : 16시",
+   "shelfLife": "",
+   "image": "https://masterc.co.kr/files/attach/images/8333658/048/320/025/dab0b833d0cc0aea4a9988560f3dda07.jpg",
+   "note": ""
+  },
   {
    "warehouse": "당일생물",
    "sourceWarehouse": "충무",
@@ -26,73 +182,6 @@
   },
   {
    "warehouse": "당일생물",
-   "sourceWarehouse": "알가",
-   "category": "",
-   "name": "생물 오징어 1kg",
-   "spec": [
-    "※ 구성 : 오징어",
-    "※ 중량/ 사이즈 : 4-7미 내외 (생물 수분감량 10%)",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 오징어 100%",
-    "※ 포장방식 : 빙장포장, 실링포장."
-   ],
-   "supplyPrice": 12000,
-   "previousPrice": 10500,
-   "tax": "면세",
-   "courier": "씨제이대한통운",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/452/779/022/8c18f2f3690a9a530ae1f2f9629fb31b.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "당일생물",
-   "sourceWarehouse": "충무",
-   "category": "",
-   "name": "통통 돌문어 1kg",
-   "spec": [
-    "※ 구성 : 돌문어",
-    "※ 중량/ 사이즈 : 1kg 1-4미 내외(중량우선)",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 돌문어 100%",
-    "※ 포장방식 : 아이스팩, 빙장포장, 비닐포장. 소분/대분 랜덤.",
-    "※ 특이사항 : 생물 수분 감량 1-20%"
-   ],
-   "supplyPrice": 17500,
-   "previousPrice": 16000,
-   "tax": "면세",
-   "courier": "씨제이대한통운/롯데택배",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/952/486/022/eea741fc7e3228232f449b510e9a9bce.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "당일생물",
-   "sourceWarehouse": "인천",
-   "category": "",
-   "name": "연안 꼬마 참소라 1kg",
-   "spec": [
-    "※ 구성 : 참소라 1kg",
-    "※ 중량/사이즈 : 1kg/30~50미 내외",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 참소라 100%",
-    "※ 포장방식 : 비닐포장"
-   ],
-   "supplyPrice": 4500,
-   "previousPrice": 5000,
-   "tax": "면세",
-   "courier": "우체국택배",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/881/203/025/0407da2e43666349920543133142cb3a.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "당일생물",
    "sourceWarehouse": "충무",
    "category": "",
    "name": "통통 민물장어 1kg",
@@ -112,28 +201,6 @@
    "shelfLife": "",
    "image": "https://masterc.co.kr/files/attach/images/8333658/434/050/025/723b763570a3bbef7f5219fd112d3bd2.jpg",
    "note": "- 구성 : 생강채 20g 2팩 > 생강채 50g 1팩"
-  },
-  {
-   "warehouse": "당일생물",
-   "sourceWarehouse": "인천",
-   "category": "",
-   "name": "연안 주먹참소라 1kg",
-   "spec": [
-    "※ 구성 : 참소라 1kg",
-    "※ 중량/ 사이즈 : 1kg/4-8미",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 참소라 100%",
-    "※ 포장방식 : 비닐실링"
-   ],
-   "supplyPrice": 9000,
-   "previousPrice": 8300,
-   "tax": "면세",
-   "courier": "우체국택배",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/319/691/006/6d705d678c33a8fab4c920558389a92e.jpg",
-   "note": ""
   },
   {
    "warehouse": "당일생물",
@@ -184,28 +251,6 @@
   },
   {
    "warehouse": "당일생물",
-   "sourceWarehouse": "동해",
-   "category": "",
-   "name": "동해 활 골뱅이 1kg",
-   "spec": [
-    "※ 구성 : 생물 골뱅이",
-    "※ 중량/사이즈 : 1kg / 70미 내외",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 흑고동 100%",
-    "※ 포장방식 : 비닐포장"
-   ],
-   "supplyPrice": 3000,
-   "previousPrice": 4500,
-   "tax": "면세",
-   "courier": "씨제이대한통운",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/651/724/024/8a2d463fa6bf45ae511849fc8dd21390.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "당일생물",
    "sourceWarehouse": "벌교",
    "category": "",
    "name": "손질 노랑새조개 200g",
@@ -225,28 +270,6 @@
    "orderCutoff": "오후마감 : 14시",
    "shelfLife": "",
    "image": "https://masterc.co.kr/files/attach/images/8333658/592/341/025/5bc549f0c0108fef64480138279e1d43.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "당일생물",
-   "sourceWarehouse": "야수",
-   "category": "",
-   "name": "숙성 민어회 300g",
-   "spec": [
-    "※ 구성 : 숙성 민어회[뱃살, 등살, 지느러미, 꼬리살, 삼각살, 부레] / 초장 1팩",
-    "※ 중량/ 사이즈 : 300g / 원물 5-6kg(수컷)",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 민어 100%[국내산(신안)]",
-    "※ 포장방식 : 아이스박스 + 비닐포장"
-   ],
-   "supplyPrice": 23000,
-   "previousPrice": 25000,
-   "tax": "면세",
-   "courier": "로젠택배",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/048/320/025/dab0b833d0cc0aea4a9988560f3dda07.jpg",
    "note": ""
   },
   {
@@ -435,28 +458,6 @@
   },
   {
    "warehouse": "당일생물",
-   "sourceWarehouse": "진수",
-   "category": "",
-   "name": "탱탱 생물 오징어 1kg",
-   "spec": [
-    "※ 구성 : 생물 오징어 1kg",
-    "※ 중량/사이즈 : 1kg 4~6미내외",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 오징어100%",
-    "※ 포장방식 : 비닐포장"
-   ],
-   "supplyPrice": 10500,
-   "previousPrice": 10000,
-   "tax": "면세",
-   "courier": "씨제이대한통운",
-   "shipFee": 4000,
-   "orderCutoff": "오후마감 : 14시",
-   "shelfLife": "",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/783/332/025/962bb5fa222a77d41a18cf7d959bbd4b.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "당일생물",
    "sourceWarehouse": "동해",
    "category": "",
    "name": "국내산 생물 오징어 1kg",
@@ -524,95 +525,6 @@
    "orderCutoff": "연장마감 : 16시",
    "shelfLife": "",
    "image": "https://masterc.co.kr/files/attach/images/8333658/089/220/012/a43744e72062ff40180a752a61d90e45.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "당일생물",
-   "sourceWarehouse": "인천",
-   "category": "",
-   "name": "연안 주먹참소라 1kg",
-   "spec": [
-    "※ 구성 : 참소라 1kg",
-    "※ 중량/ 사이즈 : 1kg/4-8미",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 참소라 100%",
-    "※ 포장방식 : 비닐실링"
-   ],
-   "supplyPrice": 7700,
-   "previousPrice": 8300,
-   "tax": "면세",
-   "courier": "우체국택배",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/319/691/006/6d705d678c33a8fab4c920558389a92e.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "당일생물",
-   "sourceWarehouse": "인천",
-   "category": "",
-   "name": "연안 연평참소라 1kg",
-   "spec": [
-    "※ 구성 : 참소라 1kg",
-    "※ 중량/ 사이즈 : 1kg/20-25미 내외",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 참소라 100%",
-    "※ 포장방식 : 비닐실링"
-   ],
-   "supplyPrice": 5000,
-   "previousPrice": 5300,
-   "tax": "면세",
-   "courier": "우체국택배",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/267/691/006/d42945ad5a6024e37397a5275f1a2545.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "당일생물",
-   "sourceWarehouse": "군산",
-   "category": "",
-   "name": "자연산 횟감 생합 500g",
-   "spec": [
-    "※ 구성 : 생합 1팩",
-    "※ 중량/ 사이즈 : 생합 500g / 20미 내외 / 사이즈 혼합",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 생합 100%",
-    "※ 포장방식 : 비닐포장",
-    "※ 특이사항 : 자연감량 10% 있습니다."
-   ],
-   "supplyPrice": 3500,
-   "previousPrice": null,
-   "tax": "면세",
-   "courier": "롯데택배",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/468/339/025/cfbb68e1024a00439d669545d6d067b8.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "당일생물",
-   "sourceWarehouse": "북구",
-   "category": "",
-   "name": "1등급 한상모듬 1kg",
-   "spec": [
-    "※ 구성 : 꽃등심 / 채끝 / 꽃갈비 / 살치살 / 허브솔트 2개",
-    "※ 중량/사이즈 :",
-    "※ 생물여부 : 냉장",
-    "※ 성분표시 : 소고기 100% / 육우",
-    "※ 포장방식 :  스킨포장"
-   ],
-   "supplyPrice": 51000,
-   "previousPrice": 48000,
-   "tax": "면세",
-   "courier": "씨제이대한통운",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/697/360/012/9a143df1b151d35c6b1c58348e5163a6.jpg",
    "note": ""
   },
   {
@@ -1094,75 +1006,6 @@
    "note": ""
   },
   {
-   "warehouse": "당일생물",
-   "sourceWarehouse": "여수",
-   "category": "",
-   "name": "만능 활 전복 1kg",
-   "spec": [
-    "※ 구성 : 활 전복 1kg",
-    "※ 중량/ 사이즈 : 1kg / 10~14미 내외",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 전복 100%",
-    "※ 포장방식 : 산소포장",
-    "※ 특이사항 : 제주도 발송 불가합니다."
-   ],
-   "supplyPrice": 15500,
-   "previousPrice": null,
-   "tax": "면세",
-   "courier": "씨제이대한통운",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/818/272/025/bc63e41c0023c7d2f5c310914118a227.jpg",
-   "note": "- 특이사항 : 제주도 발송 불가합니다."
-  },
-  {
-   "warehouse": "당일생물",
-   "sourceWarehouse": "여수",
-   "category": "",
-   "name": "자이언트 전복 1kg",
-   "spec": [
-    "※ 구성 : 활 전복 1kg",
-    "※ 중량/ 사이즈 : 1kg 4~6미 내외",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 전복 100%",
-    "※ 포장방식 : 산소포장",
-    "※ 특이사항 : 제주도 발송 불가합니다."
-   ],
-   "supplyPrice": 22000,
-   "previousPrice": 23000,
-   "tax": "면세",
-   "courier": "씨제이대한통운",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/128/281/025/7a048259397935ec3e6080ccaa9327df.jpg",
-   "note": "- 상품명 : 자이언트 4-5미 전복 1kg > 자이언트 전복 1kg\n- 스펙 : 4-5미 내외 > 4-6미 내외"
-  },
-  {
-   "warehouse": "당일생물",
-   "sourceWarehouse": "진수",
-   "category": "",
-   "name": "활 흰다리새우 500g",
-   "spec": [
-    "※ 구성 : 흰다리새우 500g",
-    "※ 중량/ 사이즈 : 500g 17미 내외 (16~18미 내외)",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 흰다리새우 100%",
-    "※ 포장방식 : 비닐포장",
-    "※ 특이사항 : 생물 자연감량 10% 발생할 수 있습니다."
-   ],
-   "supplyPrice": 14000,
-   "previousPrice": null,
-   "tax": "면세",
-   "courier": "씨제이대한통운",
-   "shipFee": 4000,
-   "orderCutoff": "오후마감 : 14시",
-   "shelfLife": "",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/834/321/025/3a99b86950d28a99f6554fd7e5fbafa6.jpg",
-   "note": "- 스펙변경 : 500g 16미 내외 (15~17미 내외)\n> 500g 17미 내외 (16~18미 내외)"
-  },
-  {
    "warehouse": "군산",
    "sourceWarehouse": "",
    "category": "",
@@ -1633,52 +1476,6 @@
    "warehouse": "군산",
    "sourceWarehouse": "",
    "category": "",
-   "name": "북해도 반건조 우럭 3미",
-   "spec": [
-    "※ 구성 : 반건조 우럭 3미",
-    "※ 중량/사이즈 : 마리당 20cm내외 / 마리당 75g ~ 155g내외",
-    "※ 생물여부 : 냉동",
-    "※ 성분표시 : 우럭 97%, 천일염(신안) 3%",
-    "※ 포장방식 : 진공포장",
-    "※ 특이사항 : 길이 기준으로 보고있어 중량은 정확하지 않을 수 있습니다."
-   ],
-   "supplyPrice": 6500,
-   "previousPrice": null,
-   "tax": "면세",
-   "courier": "롯데택배",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "-",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/228/519/024/d6b46d4e9b66b1b4c7d32eb66011a490.jpg",
-   "note": "- 스펙 : 마리당 95g ~ 155g내외 > 마리당 75g ~ 155g내외"
-  },
-  {
-   "warehouse": "군산",
-   "sourceWarehouse": "",
-   "category": "",
-   "name": "전통방식 건갈치 1kg",
-   "spec": [
-    "※ 구성 : 건칼치 1kg",
-    "※ 중량/ 사이즈 : 1kg 내외 / 몸통 60cm 내외 / 7-10마리",
-    "※ 생물여부 : 냉동",
-    "※ 성분표시 : 갈치(풀치) 100%",
-    "※ 포장방식 : 비닐포장",
-    "※ 특이사항 :"
-   ],
-   "supplyPrice": 13000,
-   "previousPrice": null,
-   "tax": "면세",
-   "courier": "롯데택배",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "-",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/125/052/025/c4fd6bc66b09d0d977f2f4194a571a52.jpg",
-   "note": "- 포장방식 : 진공 > 비닐포장"
-  },
-  {
-   "warehouse": "군산",
-   "sourceWarehouse": "",
-   "category": "",
    "name": "명품 민어조기 2미",
    "spec": [
     "※ 구성 : 명품 민어조기 2미",
@@ -1834,28 +1631,6 @@
    "orderCutoff": "연장마감 : 16시",
    "shelfLife": "-",
    "image": "https://masterc.co.kr/files/attach/images/8333658/084/296/025/adc14dd775e7ae28accad62c5ff29472.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "군산",
-   "sourceWarehouse": "",
-   "category": "",
-   "name": "대왕 급냉 갑오징어 1kg",
-   "spec": [
-    "※ 구성 : 대왕 갑오징어 1kg",
-    "※ 중량/사이즈 : 1kg내외 / 2-3미내외",
-    "※ 생물여부 : 냉동",
-    "※ 성분표시 : 갑오징어 100%",
-    "※ 포장방식 : 비닐실링"
-   ],
-   "supplyPrice": 13500,
-   "previousPrice": null,
-   "tax": "면세",
-   "courier": "롯데택배",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "-",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/459/295/025/a694e8a1814e142a6770f666a5f9426a.jpg",
    "note": ""
   },
   {
@@ -2293,6 +2068,72 @@
    "warehouse": "인천",
    "sourceWarehouse": "",
    "category": "",
+   "name": "연안 생연어 1kg",
+   "spec": [
+    "※ 구성 : 생연어 전체부위",
+    "※ 중량/ 사이즈 : 1kg",
+    "※ 생물여부 : 생물",
+    "※ 성분표시 : 생연어 100%",
+    "※ 포장방식 : 진공포장"
+   ],
+   "supplyPrice": 30600,
+   "previousPrice": 31000,
+   "tax": "면세",
+   "courier": "우체국택배",
+   "shipFee": 4000,
+   "orderCutoff": "연장마감 : 16시",
+   "shelfLife": "-",
+   "image": "https://masterc.co.kr/files/attach/images/8333658/384/690/006/4356e92d3d32c7dec25425e26e0e8417.jpg",
+   "note": ""
+  },
+  {
+   "warehouse": "인천",
+   "sourceWarehouse": "",
+   "category": "",
+   "name": "연안 생연어 500g",
+   "spec": [
+    "※ 구성 : 생연어 전체부위",
+    "※ 중량/ 사이즈 : 500g",
+    "※ 생물여부 : 생물",
+    "※ 성분표시 : 생연어 100%",
+    "※ 포장방식 : 진공포장"
+   ],
+   "supplyPrice": 15800,
+   "previousPrice": 16000,
+   "tax": "면세",
+   "courier": "우체국택배",
+   "shipFee": 4000,
+   "orderCutoff": "연장마감 : 16시",
+   "shelfLife": "-",
+   "image": "https://masterc.co.kr/files/attach/images/8333658/337/690/006/ab8c75c2896e2b188e48a43140fce566.jpg",
+   "note": ""
+  },
+  {
+   "warehouse": "인천",
+   "sourceWarehouse": "",
+   "category": "",
+   "name": "연안 생연어 300g",
+   "spec": [
+    "※ 구성 : 생연어 전체부위",
+    "※ 중량/ 사이즈 : 300g",
+    "※ 생물여부 : 생물",
+    "※ 성분표시 : 생연어 100%",
+    "※ 포장방식 : 진공포장"
+   ],
+   "supplyPrice": 9300,
+   "previousPrice": 9500,
+   "tax": "면세",
+   "courier": "우체국택배",
+   "shipFee": 4000,
+   "orderCutoff": "연장마감 : 16시",
+   "shelfLife": "-",
+   "image": "https://masterc.co.kr/files/attach/images/8333658/299/690/006/a044955a08c73cc472dfcdcd371176ca.jpg",
+   "note": ""
+  },
+  {
+   "warehouse": "인천",
+   "sourceWarehouse": "",
+   "category": "",
    "name": "연안 백상합 1kg",
    "spec": [
     "※ 구성 : 백상합",
@@ -2354,72 +2195,6 @@
    "orderCutoff": "연장마감 : 16시",
    "shelfLife": "-",
    "image": "https://masterc.co.kr/files/attach/images/8333658/593/686/006/c01f9c4a42fb4b20f32d3e6a167c95a7.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "인천",
-   "sourceWarehouse": "",
-   "category": "",
-   "name": "연안 생연어 1kg",
-   "spec": [
-    "※ 구성 : 생연어 전체부위",
-    "※ 중량/ 사이즈 : 1kg",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 생연어 100%",
-    "※ 포장방식 : 진공포장"
-   ],
-   "supplyPrice": 31000,
-   "previousPrice": 30500,
-   "tax": "면세",
-   "courier": "우체국택배",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "-",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/384/690/006/4356e92d3d32c7dec25425e26e0e8417.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "인천",
-   "sourceWarehouse": "",
-   "category": "",
-   "name": "연안 생연어 500g",
-   "spec": [
-    "※ 구성 : 생연어 전체부위",
-    "※ 중량/ 사이즈 : 500g",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 생연어 100%",
-    "※ 포장방식 : 진공포장"
-   ],
-   "supplyPrice": 16000,
-   "previousPrice": 15800,
-   "tax": "면세",
-   "courier": "우체국택배",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "-",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/337/690/006/ab8c75c2896e2b188e48a43140fce566.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "인천",
-   "sourceWarehouse": "",
-   "category": "",
-   "name": "연안 생연어 300g",
-   "spec": [
-    "※ 구성 : 생연어 전체부위",
-    "※ 중량/ 사이즈 : 300g",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 생연어 100%",
-    "※ 포장방식 : 진공포장"
-   ],
-   "supplyPrice": 9500,
-   "previousPrice": 9400,
-   "tax": "면세",
-   "courier": "우체국택배",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "-",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/299/690/006/a044955a08c73cc472dfcdcd371176ca.jpg",
    "note": ""
   },
   {
@@ -3722,7 +3497,7 @@
    "name": "초벌 고창 풍천 장어 1kg",
    "spec": [
     "※ 구성 : 초벌 고창 풍천 장어 1kg, 소스 2종",
-    "※ 중량/ 사이즈 : 2~4미 / 장어 실중량 550g내외",
+    "※ 중량/ 사이즈 : 2~4미 / 장어 실중량 600~700g",
     "※ 생물여부 : 냉동",
     "※ 성분표시 : 장어 100%",
     "※ 포장방식 : 진공포장",
@@ -5337,28 +5112,6 @@
    "orderCutoff": "연장마감 : 16시",
    "shelfLife": "27-05-18",
    "image": "https://masterc.co.kr/files/attach/images/8333658/020/849/007/42df49b15acd07e3a79fc25d26c1ade5.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "김포",
-   "sourceWarehouse": "",
-   "category": "",
-   "name": "쫄깃 닭목살 1kg",
-   "spec": [
-    "※ 구성 : 닭목살 1팩",
-    "※ 중량/ 사이즈 : 1kg",
-    "※ 생물여부 : 냉동",
-    "※ 성분표시 : 닭목살 100%",
-    "※ 포장방식 : 진공포장"
-   ],
-   "supplyPrice": 7500,
-   "previousPrice": 7000,
-   "tax": "면세",
-   "courier": "씨제이대한통운",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "2027. 5. 21",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/252/700/006/a92b0b182d2e0da48e9b7b735f5a9bb0.jpg",
    "note": ""
   },
   {
@@ -7523,7 +7276,7 @@
    "orderCutoff": "연장마감 : 16시",
    "shelfLife": "-",
    "image": "https://masterc.co.kr/files/attach/images/8333658/363/952/023/57f890eb9126c100b70a8ce00d9d0150.jpg",
-   "note": "- 스펙 : 50~55미내외 > 70미내외"
+   "note": "- 스펙 : 1kg 70미 내외 > 1kg 50-55미 내외"
   },
   {
    "warehouse": "단독(유)",
@@ -9371,29 +9124,6 @@
    "orderCutoff": "오전마감 : 12시",
    "shelfLife": "",
    "image": "https://masterc.co.kr/files/attach/images/8333658/384/624/024/35dfa162492a5081137c965e0f74b5b7.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "단독(유)",
-   "sourceWarehouse": "오징",
-   "category": "",
-   "name": "건오징어 5미 250g",
-   "spec": [
-    "※ 구성 : 건오징어 5미 1팩",
-    "※ 중량/ 사이즈 : 250g 내외",
-    "※ 생물여부 : 냉동",
-    "※ 성분표시 : 오징어 100%",
-    "※ 포장방식 : 진공포장",
-    "※ 특이사항 : 제주도 발송 불가합니다."
-   ],
-   "supplyPrice": 17000,
-   "previousPrice": null,
-   "tax": "면세",
-   "courier": "씨제이대한통운",
-   "shipFee": 4000,
-   "orderCutoff": "오후마감 : 14시",
-   "shelfLife": "-",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/831/991/024/f68948e45429b4e9d84d24baff96b5d4.jpg",
    "note": ""
   },
   {
