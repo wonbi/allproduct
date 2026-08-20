@@ -205,7 +205,7 @@ footer b{color:var(--steel)}
 .lightbox-close:hover{border-color:var(--amber);color:var(--amber)}
 </style></head><body>
 <button class="themetoggle" id="themeToggle" aria-label="테마 전환">🌙</button>
-<div class="adminbar" id="adminBar">🔓 <b>관리자 모드</b> — 실제 공급가가 보이고 있습니다 · 가격을 클릭하면 수정돼요 <button id="btnLock">잠그기</button></div>
+<div class="adminbar" id="adminBar">🔓 <b>관리자 모드</b> — 실제 공급가가 보이고 있습니다 · 가격을 클릭하면 수정돼요 <button id="btnSyncNow">🔄 지금 동기화</button> <button id="btnLock">잠그기</button></div>
 <div class="wrap">
 
 <div class="board-top">
@@ -410,6 +410,53 @@ function bumpViewCounter(){
   if(today){
     today.onerror=()=>{ $('roViewsTodayWrap').style.display='none'; };
     today.src='https://visitor-badge.laobi.icu/badge?page_id=wonbi-allproduct-index-daily-'+kstDateKey()+'&color=1f8f63';
+  }
+}
+/* ─────────────────────────────────────────────────────────────
+   지금 동기화 — 정적 사이트라 서버가 없으므로, 이미 워크플로에 걸려 있는
+   GitHub Actions(.github/workflows/sync-catalog.yml, workflow_dispatch)를
+   브라우저에서 GitHub REST API로 직접 호출해 즉시 실행시킨다(2023년부터
+   api.github.com이 CORS를 지원해 프록시 서버 없이 가능). 실행에 쓰는
+   GitHub 토큰은 이 브라우저의 localStorage에만 저장되고 GitHub API 외
+   어디로도 전송되지 않는다 — 이 저장소 하나에만 Actions:write 권한을 준
+   fine-grained PAT를 쓰길 권장한다(레포 전체 권한의 classic 토큰은 쓰지 말 것).
+   ───────────────────────────────────────────────────────────── */
+const GH_PAT_KEY='mv_gh_pat';
+const GH_OWNER='wonbi', GH_REPO='allproduct', GH_WORKFLOW='sync-catalog.yml';
+async function syncNow(){
+  let token=localStorage.getItem(GH_PAT_KEY);
+  if(!token){
+    token=prompt('GitHub 토큰을 입력하세요.\n\n이 저장소(allproduct)에 Actions:write 권한만 준 fine-grained PAT를 만들어 붙여넣으세요. 브라우저에만 저장되고 GitHub API 외에는 전송되지 않습니다.');
+    if(!token)return;
+    token=token.trim();
+    if(!token)return;
+    localStorage.setItem(GH_PAT_KEY,token);
+  }
+  const btn=$('btnSyncNow');
+  if(btn){btn.disabled=true;btn.textContent='⏳ 요청 중…';}
+  try{
+    const res=await fetch('https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/actions/workflows/'+GH_WORKFLOW+'/dispatches',{
+      method:'POST',
+      headers:{
+        'Authorization':'Bearer '+token,
+        'Accept':'application/vnd.github+json',
+        'X-GitHub-Api-Version':'2022-11-28',
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({ref:'main'})
+    });
+    if(res.status===204){
+      toast('동기화를 시작했어요 — 1~2분 후 새로고침하면 반영됩니다');
+    }else if(res.status===401||res.status===403){
+      localStorage.removeItem(GH_PAT_KEY);
+      toast('토큰이 유효하지 않아요('+res.status+') — 다시 입력해주세요');
+    }else{
+      toast('동기화 요청 실패 ('+res.status+')');
+    }
+  }catch(err){
+    toast('동기화 요청 실패 — 네트워크를 확인해주세요');
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent='🔄 지금 동기화';}
   }
 }
 function updateEditBadge(){
@@ -647,6 +694,7 @@ document.addEventListener('click',e=>{
   }
   if(e.target.id==='adminLink'){e.preventDefault();if(isAdmin())lockAdmin();else tryUnlock();return;}
   if(e.target.id==='btnLock'){lockAdmin();return;}
+  if(e.target.id==='btnSyncNow'){syncNow();return;}
 });
 document.addEventListener('focusout',e=>{
   if(e.target.classList&&e.target.classList.contains('pedit')){

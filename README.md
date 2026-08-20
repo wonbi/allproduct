@@ -68,6 +68,25 @@ node scripts/sync-catalog.js
 다음 동기화 때 시트 값으로 되돌아갑니다. 특정 가격을 사이트에서만 다르게 유지하고 싶다면
 시트 자체를 고쳐야 합니다.
 
+### 수동 동기화 (지금 동기화 버튼)
+
+하루 한 번(GitHub Actions cron `.github/workflows/sync-catalog.yml`) 외에, `index.html`
+관리자 모드에서 **🔄 지금 동기화** 버튼으로 즉시 실행할 수 있습니다. 정적 사이트라 서버가
+없으므로, 이미 걸려 있는 워크플로(`workflow_dispatch`)를 브라우저에서 GitHub REST API로
+직접 호출하는 방식입니다.
+
+- 처음 누르면 GitHub 토큰을 입력받습니다 — **이 저장소(`wonbi/allproduct`)에
+  `Actions: write` 권한만 준 fine-grained PAT**를 만들어 붙여넣으세요
+  (Settings → Developer settings → Fine-grained tokens → Repository access를
+  `allproduct` 하나로 제한 → Permissions에서 Actions: Read and write). 레포 전체
+  권한을 갖는 classic 토큰은 쓰지 마세요.
+- 토큰은 브라우저 `localStorage`에만 저장되고 GitHub API 외 어디로도 전송되지
+  않습니다. 다만 브라우저에 남는 값이라 완전한 보안은 아니며(관리자 비밀번호와
+  같은 위협 모델), 공용 PC에서는 쓰지 않는 게 좋습니다.
+- 실행을 요청하면 GitHub Actions에서 `scripts/sync-catalog.js`가 돌고, 변경사항이
+  있으면 자동 커밋·푸시됩니다 — 완료까지 보통 1~2분 걸리며 버튼 클릭 직후에는
+  반영되지 않습니다.
+
 ## GitHub Pages 설정 (최초 1회)
 
 레포 **Settings → Pages → Source: `Deploy from a branch`**, Branch를 `main` / `(root)`로
