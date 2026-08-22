@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-08-21 10:16",
+ "updatedAt": "2026-08-22 10:12",
  "supplier": "마스터 유통",
  "products": [
   {
@@ -683,30 +683,6 @@
   },
   {
    "warehouse": "당일생물",
-   "sourceWarehouse": "인천",
-   "category": "",
-   "name": "연안 중대담치 2kg",
-   "spec": [
-    "※ 구성 : 담치 2kg",
-    "※ 중량/ 사이즈 : 2kg/35-45미 내외",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 담치 100%",
-    "※ 포장방식 : 비닐실링",
-    "※생물 특성상 마릿수차이가 있을 수 있습니다.",
-    "※활 담치라 물뱉음으로 인한 중량감소 10%가량 있을 수 있습니다.​"
-   ],
-   "supplyPrice": 11000,
-   "previousPrice": null,
-   "tax": "면세",
-   "courier": "우체국택배",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/401/326/025/0bdf7076fded1e7b19bc41c1373d3600.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "당일생물",
    "sourceWarehouse": "알가",
    "category": "",
    "name": "생물 갑오징어 1kg",
@@ -818,28 +794,6 @@
    "orderCutoff": "오후마감 : 14시",
    "shelfLife": "",
    "image": "https://masterc.co.kr/files/attach/images/8333658/012/884/024/a518bfd03d8a5f3fa3593e35ca29de8b.jpg",
-   "note": ""
-  },
-  {
-   "warehouse": "당일생물",
-   "sourceWarehouse": "충무",
-   "category": "",
-   "name": "통통 보라성게알 100g",
-   "spec": [
-    "※ 구성 : 통영 보라성게알 100g",
-    "※ 중량/ 사이즈 : 1통 / 100g (성게알 100g, 해수 10g~20g)",
-    "※ 생물여부 : 생물",
-    "※ 성분표시 : 보라성게알 100%",
-    "※ 포장방식 : PE용기, 비닐포장, 빙장포장, 아이스팩"
-   ],
-   "supplyPrice": 12500,
-   "previousPrice": 14000,
-   "tax": "면세",
-   "courier": "씨제이대한통운/롯데택배",
-   "shipFee": 4000,
-   "orderCutoff": "연장마감 : 16시",
-   "shelfLife": "",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/732/164/022/de597431c3c5227fb7a96b2753ffb770.jpg",
    "note": ""
   },
   {
@@ -9712,7 +9666,7 @@
    "shipFee": 0,
    "orderCutoff": "연장마감 : 16시",
    "shelfLife": "-",
-   "image": "https://masterc.co.kr/files/attach/images/8333658/754/301/025/524e0603ee5ab703825b3e96f06710db.jpg",
+   "image": "https://masterc.co.kr/files/attach/images/8333658/754/301/025/6cfbd3d0e3066d6f7a1d8d5ca288621a.jpg",
    "note": ""
   },
   {
