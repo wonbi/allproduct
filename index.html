@@ -157,16 +157,17 @@ td.ship b{color:var(--ink);font-variant-numeric:tabular-nums}
 td.cut{font-size:13px;color:var(--steel);white-space:nowrap}
 .emptyrow td{text-align:center;color:var(--steel-2);padding:52px 0;font-size:15px}
 
-/* ── 모바일 카드 (표는 좁은 화면에서 가로 스크롤이 필요해 720px부터 카드로 전환) ── */
-.mgrid{display:none}
+/* ── 카드 그리드 (사진이 중요해서 표 대신 모든 화면 크기에서 카드로 보여준다 —
+   사진을 카드 위에 꽉 채우고 정보는 그 아래로) ── */
+.tscroll{display:none}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;padding:18px}
 @media(max-width:760px){
-  .tscroll{display:none}
-  .mgrid{display:flex;flex-direction:column;gap:10px;padding:12px}
+  .mgrid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;padding:12px}
 }
-.mcard{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:13px}
-.mtop{display:flex;gap:12px}
-.mth{width:118px;height:118px;border-radius:11px;object-fit:cover;background:var(--panel);flex:none;display:block}
-.mth-none{width:118px;height:118px;border-radius:11px;flex:none;border:1px solid var(--line-2);
+.mcard{background:var(--panel-2);border:1px solid var(--line);border-radius:14px;padding:13px;display:flex;flex-direction:column}
+.mtop{display:flex;flex-direction:column;gap:12px}
+.mth{width:100%;height:auto;aspect-ratio:4/3;border-radius:10px;object-fit:cover;background:var(--panel);flex:none;display:block}
+.mth-none{width:100%;height:auto;aspect-ratio:4/3;border-radius:10px;flex:none;border:1px solid var(--line-2);
   background:repeating-linear-gradient(135deg,var(--board),var(--board) 5px,var(--line) 5px,var(--line) 10px)}
 .mhead{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;justify-content:center}
 .mname{font-size:17px;font-weight:700;letter-spacing:-.2px;line-height:1.35;display:flex;align-items:flex-start;gap:7px}
@@ -585,8 +586,8 @@ function row(p,showWh){
     +'<td class="ship">'+ship+'</td>'
     +'<td class="cut">'+(esc(p.cut)||'—')+'</td></tr>';
 }
-// 표는 컬럼이 6개라 좁은 화면에서 가로 스크롤이 강제됨 — 720px 아래에서는
-// 같은 데이터를 세로로 쌓는 카드로 렌더링한다 (row()와 같은 값 계산, 마크업만 다름).
+// 사진이 잘 보이도록 표 대신 카드로 렌더링한다 (모든 화면 크기 공통).
+// row()는 표 마크업을 만들지만 CSS에서 항상 숨겨둔다 — 같은 값 계산, 마크업만 다름.
 function cardHtml(p,showWh){
   const m=mediaOf(p);
   const th=(m&&m.img)
