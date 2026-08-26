@@ -2,10 +2,11 @@
 /*
  * data/products.json을 마스터 유통 유통시트에서 다시 읽어와 갱신한다.
  *
- * 인증키는 이 스크립트 안에 없다 — chanwha0221-cmyk/baljuseo (공개 레포)의
+ * 인증키는 이 스크립트 안에 없다 — chanwha0221-cmyk/baljuseo (비공개 레포)의
  * catalog.html에 이미 박혀 있는 읽기전용 서비스계정(spreadsheets.readonly)을
- * 실행할 때마다 그 자리에서 읽어 쓰고 버린다. 그래서 이 레포(공개)에는
- * 어떤 비밀값도 커밋되지 않는다.
+ * 실행할 때마다 그 자리에서 읽어 쓰고 버린다. 그래서 이 레포에는 그 서비스계정
+ * 비밀값이 커밋되지 않는다 — 대신 baljuseo 레포 자체를 읽기 위한 BALJUSEO_TOKEN
+ * (그 레포 전용 fine-grained PAT, read-only)을 환경변수로 받는다.
  *
  * 사용법: node scripts/sync-catalog.js [--baljuseo <clone-path>] [--out <products.json 경로>]
  * 종료코드 0 = 성공(파일을 갱신했음), 0이 아니면 실패 — 이 경우 호출한 쪽은
@@ -32,10 +33,20 @@ function ensureBaljuseoClone() {
     return;
   }
   log('baljuseo 클론 중 →', BALJUSEO_PATH);
-  execSync(
-    `GIT_LFS_SKIP_SMUDGE=1 git clone --depth 1 https://github.com/chanwha0221-cmyk/baljuseo "${BALJUSEO_PATH}"`,
-    { stdio: 'inherit' }
-  );
+  const token = process.env.BALJUSEO_TOKEN;
+  const env = Object.assign({}, process.env, { GIT_LFS_SKIP_SMUDGE: '1', GIT_TERMINAL_PROMPT: '0' });
+  let url = 'https://github.com/chanwha0221-cmyk/baljuseo';
+  if (token) {
+    // 토큰을 명령줄 문자열에 직접 넣지 않는다 — 실패 시 에러 메시지에 그대로
+    // 노출될 수 있으므로 GIT_ASKPASS를 통해 넘긴다.
+    const askpassPath = path.join(require('os').tmpdir(), 'baljuseo-askpass.sh');
+    fs.writeFileSync(askpassPath, '#!/bin/sh\necho "$BALJUSEO_TOKEN"\n', { mode: 0o700 });
+    env.GIT_ASKPASS = askpassPath;
+    url = 'https://x-access-token@github.com/chanwha0221-cmyk/baljuseo';
+  } else {
+    log('경고: BALJUSEO_TOKEN이 설정되어 있지 않습니다 — baljuseo가 비공개 레포라면 클론이 실패합니다.');
+  }
+  execSync(`git clone --depth 1 ${url} "${BALJUSEO_PATH}"`, { stdio: 'inherit', env });
 }
 
 function extractCreds() {
