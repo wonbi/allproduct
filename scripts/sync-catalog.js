@@ -8,6 +8,10 @@
  * 비밀값이 커밋되지 않는다 — 대신 baljuseo 레포 자체를 읽기 위한 BALJUSEO_TOKEN
  * (그 레포 전용 fine-grained PAT, read-only)을 환경변수로 받는다.
  *
+ * data/image-overrides.json에 있는 항목(관리자가 사이트에서 직접 바꾼 사진)은
+ * 시트에서 새로 받아온 사진보다 항상 우선한다 — 그래야 매일 도는 이 스크립트가
+ * 관리자가 바꾼 사진을 지우지 않는다.
+ *
  * 사용법: node scripts/sync-catalog.js [--baljuseo <clone-path>] [--out <products.json 경로>]
  * 종료코드 0 = 성공(파일을 갱신했음), 0이 아니면 실패 — 이 경우 호출한 쪽은
  * 커밋하면 안 된다(기존 data/products.json을 그대로 둬야 함).
@@ -194,22 +198,33 @@ function kstStamp() {
   return `${g('year')}-${g('month')}-${g('day')} ${g('hour')}:${g('minute')}`;
 }
 
+// 관리자가 사이트에서 직접 사진을 바꾸면 data/image-overrides.json에 커밋된다
+// (index.html의 commitImageOverride 참고). 시트에서 새로 받아온 사진을 여기서
+// 다시 덮어써서, 매일 도는 이 스크립트가 관리자가 바꾼 사진을 지우지 않게 한다.
+const OVERRIDES_PATH = path.join(__dirname, '..', 'data', 'image-overrides.json');
+function loadImageOverrides() {
+  try { return JSON.parse(fs.readFileSync(OVERRIDES_PATH, 'utf8')); }
+  catch (e) { return {}; }
+}
+
 (async () => {
   ensureBaljuseoClone();
   const creds = extractCreds();
   const token = await getAccessToken(creds);
   log('인증 완료');
   const [groups, media] = await Promise.all([loadCatalog(creds, token), loadMedia(creds, token)]);
+  const overrides = loadImageOverrides();
 
   const products = [];
   groups.forEach(g => g.products.forEach(p => {
     const m = media['n:' + pkey(p.name)] || null;
+    const ov = overrides[pkey(p.name)];
     products.push({
       warehouse: g.wh, sourceWarehouse: (p.srcWh && p.srcWh !== g.wh) ? p.srcWh : '',
       category: '', name: p.name, spec: (m && m.spec && m.spec.length) ? m.spec : [],
       supplyPrice: p.cur, previousPrice: p.old, tax: p.tax, courier: p.courier,
       shipFee: p.ship, orderCutoff: p.cut, shelfLife: p.exp,
-      image: (m && m.img) ? m.img : '', note: p.ref || ''
+      image: (ov && ov.image) ? ov.image : ((m && m.img) ? m.img : ''), note: p.ref || ''
     });
   }));
 
