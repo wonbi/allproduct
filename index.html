@@ -169,6 +169,10 @@ td.cut{font-size:13px;color:var(--steel);white-space:nowrap}
 .mth{width:100%;height:auto;aspect-ratio:4/3;border-radius:10px;object-fit:cover;background:var(--panel);flex:none;display:block}
 .mth-none{width:100%;height:auto;aspect-ratio:4/3;border-radius:10px;flex:none;border:1px solid var(--line-2);
   background:repeating-linear-gradient(135deg,var(--board),var(--board) 5px,var(--line) 5px,var(--line) 10px)}
+.mthwrap{position:relative}
+.imgeditbtn{position:absolute;right:8px;bottom:8px;border:1px solid var(--line);background:rgba(20,22,25,.78);
+  color:#fff;border-radius:7px;padding:5px 10px;font-size:12px;font-weight:700;cursor:pointer;backdrop-filter:blur(2px)}
+.imgeditbtn:hover{border-color:var(--amber);color:var(--amber)}
 .mhead{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;justify-content:center}
 .mname{font-size:17px;font-weight:700;letter-spacing:-.2px;line-height:1.35;display:flex;align-items:flex-start;gap:7px}
 .mname a{color:inherit;text-decoration:none;border-bottom:1px dashed var(--steel-2)}
@@ -206,7 +210,7 @@ footer b{color:var(--steel)}
 .lightbox-close:hover{border-color:var(--amber);color:var(--amber)}
 </style></head><body>
 <button class="themetoggle" id="themeToggle" aria-label="테마 전환">🌙</button>
-<div class="adminbar" id="adminBar">🔓 <b>관리자 모드</b> — 실제 공급가가 보이고 있습니다 · 가격을 클릭하면 수정돼요 <button id="btnSyncNow">🔄 지금 동기화</button> <button id="btnLock">잠그기</button></div>
+<div class="adminbar" id="adminBar">🔓 <b>관리자 모드</b> — 실제 공급가가 보이고 있습니다 · 가격을 클릭하면 수정돼요 · 사진 위 "✎ 사진" 버튼으로 사진을 바꿀 수 있어요 <button id="btnSyncNow">🔄 지금 동기화</button> <button id="btnLock">잠그기</button></div>
 <div class="wrap">
 
 <div class="board-top">
@@ -460,6 +464,76 @@ async function syncNow(){
     if(btn){btn.disabled=false;btn.textContent='🔄 지금 동기화';}
   }
 }
+/* ─────────────────────────────────────────────────────────────
+   사진 직접 바꾸기 — data/image-overrides.json에 상품명(pkey)별 사진 주소를
+   커밋해둔다. 매일 도는 scripts/sync-catalog.js가 시트에서 새로 받아온 사진보다
+   이 파일을 항상 우선하도록 되어 있어서, 여기서 바꾼 사진은 다음 자동 동기화에도
+   지워지지 않는다 — 즉 "영구" 반영. 지금 동기화용 토큰과는 별도로 이 저장소에
+   Contents:write 권한만 준 fine-grained PAT를 하나 더 받는다(권한을 최소로 쪼개기
+   위해 토큰을 분리했다).
+   ───────────────────────────────────────────────────────────── */
+const GH_PAT_CONTENT_KEY='mv_gh_pat_content';
+const OVERRIDES_PATH='data/image-overrides.json';
+function b64EncodeUtf8(str){return btoa(String.fromCharCode.apply(null,new TextEncoder().encode(str)));}
+function b64DecodeUtf8(b64){return new TextDecoder().decode(Uint8Array.from(atob(b64.replace(/\n/g,'')),c=>c.charCodeAt(0)));}
+async function editImage(id){
+  const p=PBYID[id];if(!p||!isAdmin())return;
+  const url=prompt('새 이미지 주소를 입력하세요 (비우고 확인하면 원래 사진으로 되돌아갑니다)',p.img||'');
+  if(url==null)return;
+  await commitImageOverride(p,url.trim());
+}
+async function commitImageOverride(p,newUrl){
+  let token=localStorage.getItem(GH_PAT_CONTENT_KEY);
+  if(!token){
+    token=prompt('GitHub 토큰을 입력하세요.\n\n이 저장소(allproduct)에 Contents:read/write 권한만 준 fine-grained PAT를 만들어 붙여넣으세요. "지금 동기화"용 토큰과는 다른 별도 토큰이어야 합니다. 브라우저에만 저장되고 GitHub API 외에는 전송되지 않습니다.');
+    if(!token)return;
+    token=token.trim();
+    if(!token)return;
+    localStorage.setItem(GH_PAT_CONTENT_KEY,token);
+  }
+  const api='https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+OVERRIDES_PATH;
+  const headers={'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'};
+  toast('저장하는 중…');
+  try{
+    let sha=null,obj={};
+    const getRes=await fetch(api+'?ref=main',{headers});
+    if(getRes.status===200){
+      const j=await getRes.json();
+      sha=j.sha;
+      try{obj=JSON.parse(b64DecodeUtf8(j.content))||{};}catch(e){obj={};}
+    }else if(getRes.status!==404){
+      if(getRes.status===401||getRes.status===403){
+        localStorage.removeItem(GH_PAT_CONTENT_KEY);
+        toast('토큰이 유효하지 않아요('+getRes.status+') — 다시 입력해주세요');
+      }else{
+        toast('사진 저장 실패 (조회 '+getRes.status+')');
+      }
+      return;
+    }
+    const key=pkey(p.name);
+    if(newUrl){obj[key]={image:newUrl,updatedAt:kstStamp()};}
+    else{delete obj[key];}
+    const putBody={
+      message:'관리자: '+p.name+' 사진 '+(newUrl?'변경':'초기화'),
+      content:b64EncodeUtf8(JSON.stringify(obj,null,1)),
+      branch:'main'
+    };
+    if(sha)putBody.sha=sha;
+    const putRes=await fetch(api,{method:'PUT',headers:Object.assign({'Content-Type':'application/json'},headers),body:JSON.stringify(putBody)});
+    if(putRes.ok){
+      p.img=newUrl;
+      render();
+      toast(newUrl?'사진이 저장됐어요 — 모두에게 반영됩니다':'사진을 원래대로 되돌렸어요');
+    }else if(putRes.status===401||putRes.status===403){
+      localStorage.removeItem(GH_PAT_CONTENT_KEY);
+      toast('토큰이 유효하지 않아요('+putRes.status+') — 다시 입력해주세요');
+    }else{
+      toast('사진 저장 실패 ('+putRes.status+')');
+    }
+  }catch(err){
+    toast('사진 저장 실패 — 네트워크를 확인해주세요');
+  }
+}
 function updateEditBadge(){
   const b=$('exportBtn');
   if(isAdmin()&&EDITCOUNT>0){b.style.display='inline-flex';b.textContent='⬇ 변경사항 내보내기 ('+EDITCOUNT+')';}
@@ -595,6 +669,8 @@ function cardHtml(p,showWh){
   const th=(m&&m.img)
     ?'<img class="mth" src="'+esc(thumbUrl(m.img))+'" data-full="'+esc(m.img)+'" alt="'+esc(p.name)+'" loading="lazy" onerror="thumbFail(this)">'
     :'<div class="mth-none"></div>';
+  const imgEdit=isAdmin()?'<button class="imgeditbtn" data-edit-img="'+p.id+'" title="사진 주소 바꾸기">✎ 사진</button>':'';
+  const thwrap='<div class="mthwrap">'+th+imgEdit+'</div>';
   const href=(m&&m.link)||p.url||'';
   const nm=href?('<a href="'+esc(href)+'" target="_blank" rel="noopener">'+esc(p.name)+'</a>'):esc(p.name);
   const whName=showWh?p.wh:(p.srcWh||'');
@@ -612,7 +688,7 @@ function cardHtml(p,showWh){
     ?((p.courier?esc(p.courier.split('/')[0])+' ':'')+'<b>'+won(p.ship)+'</b>')
     :'<span class="free">무료배송</span>');
   const hasChg=p.price.old!=null&&p.price.cur!=null&&p.price.old!==p.price.cur;
-  return '<div class="mcard"><div class="mtop">'+th+'<div class="mhead">'
+  return '<div class="mcard"><div class="mtop">'+thwrap+'<div class="mhead">'
     +'<div class="mname"><span>'+nm+'</span><button class="cpbtn" data-cp="'+esc(p.name)+'" title="상품명 복사">📋</button></div>'
     +(tags?'<div class="itag">'+tags+'</div>':'')+'</div></div>'
     +(specs.length?'<div class="mspec">'+specs.join('<br>')+'</div>':'')
@@ -677,6 +753,8 @@ document.addEventListener('click',e=>{
     applyTheme(document.documentElement.getAttribute('data-theme')==='light'?'dark':'light');
     return;
   }
+  const imgEditBtn=e.target.closest('[data-edit-img]');
+  if(imgEditBtn){editImage(imgEditBtn.getAttribute('data-edit-img'));return;}
   const img=e.target.closest('.th,.mth');
   if(img){openLightbox(img);return;}
   if(e.target.id==='lightbox'||e.target.id==='lightboxClose'){closeLightbox();return;}
