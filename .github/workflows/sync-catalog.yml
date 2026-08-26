@@ -20,6 +20,8 @@ jobs:
           node-version: '22'
 
       - name: Run sync
+        env:
+          BALJUSEO_TOKEN: ${{ secrets.BALJUSEO_TOKEN }}
         run: node scripts/sync-catalog.js
 
       - name: Commit and push if changed
