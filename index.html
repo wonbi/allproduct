@@ -498,8 +498,10 @@ function commitPriceEdit(id,rawVal){
 // 표 안 썸네일은 46×35라 훨씬 작게 받는다. 프록시가 죽으면 원본, 원본도 실패하면 빈 칸으로 단계 폴백.
 function thumbUrl(u){
   // 레포에 담긴 이미지는 이미 작게 만들어 두어 프록시가 필요 없다. 외부 URL이면 리사이즈 프록시를 태운다.
+  // 카드 그리드에서 사진이 카드 폭 전체(최대 ~450px, 고밀도 화면은 그 2배)로 보이므로
+  // 예전 작은 썸네일(118px) 시절 값(160x120)보다 훨씬 크게 받아와야 흐릿하지 않다.
   if(!/^https?:\/\//.test(u))return u;
-  return 'https://images.weserv.nl/?url='+encodeURIComponent(u.replace(/^https?:\/\//,''))+'&w=160&h=120&fit=cover&output=webp&q=74';
+  return 'https://images.weserv.nl/?url='+encodeURIComponent(u.replace(/^https?:\/\//,''))+'&w=640&h=480&fit=cover&output=webp&q=78';
 }
 function thumbFail(el){
   const full=el.getAttribute('data-full');
