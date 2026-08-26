@@ -49,6 +49,12 @@ a{color:inherit}
   border:none;border-radius:24px;padding:13px 20px;font-weight:800;font-size:13px;cursor:pointer;
   box-shadow:0 6px 22px rgba(0,0,0,.45);font-family:inherit}
 .exportfab:hover{background:#f0b862}
+.kakaofab{position:fixed;left:18px;bottom:18px;z-index:70;background:#FEE500;color:#1a1408;
+  border:none;border-radius:26px;padding:14px 22px;font-weight:800;font-size:14.5px;cursor:pointer;
+  box-shadow:0 6px 22px rgba(0,0,0,.35);font-family:inherit;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;transition:.12s}
+.kakaofab:hover{background:#f5d900;transform:translateY(-1px)}
+@media(max-width:760px){.kakaofab{padding:12px 18px;font-size:13.5px;left:14px;bottom:14px}}
 
 /* ── 상단 전광판 ── */
 .board-top{border-bottom:1px solid var(--line);padding:20px 0 16px}
@@ -237,7 +243,7 @@ footer b{color:var(--steel)}
     <p>저희는 전국 산지 상품을 중심으로 상시 <b>300~500여 가지 이상의 농·축·수산물</b>을 꾸준히 운영 중이며, 소량 한 건도 <b>택배로 즉시 납품 가능</b>합니다.</p>
     <p><b>추석 대비 단독(선물) 창고</b>를 별도로 운영하고 있으니, 참고바랍니다.</p>
   </div>
-  <div class="rule">🚚 <b>합포장(합배송)은 같은 창고 상품끼리만 됩니다.</b> 서로 다른 창고 상품은 배송비가 각각 붙어요. · 💬 상품 · 수량 문의 카톡 <b>wonbi123</b> · 메일 <b>feellost@naver.com</b></div>
+  <div class="rule">🚚 <b>합포장(합배송)은 같은 창고 상품끼리만 됩니다.</b> 서로 다른 창고 상품은 배송비가 각각 붙어요. · 💬 상품 · 수량 문의 카톡 <a href="https://open.kakao.com/o/sN0ggZzi" target="_blank" rel="noopener"><b>wonbi123</b></a> · 메일 <b>feellost@naver.com</b></div>
 </div>
 
 <div class="load" id="load">⏳ 상품을 불러오는 중입니다…</div>
@@ -272,6 +278,7 @@ footer b{color:var(--steel)}
 
 <footer id="ft">마스터 유통 · 거래처 상품 카탈로그 · <a href="#" id="adminLink">관리자</a></footer>
 </div>
+<a class="kakaofab" href="https://open.kakao.com/o/sN0ggZzi" target="_blank" rel="noopener">💬 카톡 문의하기</a>
 <button class="exportfab" id="exportBtn" style="display:none">⬇ 변경사항 내보내기</button>
 <div class="toast" id="toast"></div>
 <div class="lightbox" id="lightbox">
