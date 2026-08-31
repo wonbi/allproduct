@@ -1,9 +1,11 @@
 name: Sync catalog from 유통시트
 
 on:
-  schedule:
-    # 매일 09:00 KST (00:00 UTC)
-    - cron: '0 0 * * *'
+  # 2026-08-31: index.html이 baljuseo가 직접 호스팅하는 data/allproduct.json을
+  # 매번 실시간으로 바로 읽어오도록 바뀌면서, 이 워크플로우가 만드는
+  # data/products.json은 더 이상 어디서도 안 쓰인다. 정기 실행은 꺼두고
+  # (baljuseo 쪽 인증 구조 변경 이후 계속 실패만 하고 있었음),
+  # 필요할 때 수동으로만 돌릴 수 있게 workflow_dispatch만 남긴다.
   workflow_dispatch: {}
 
 permissions:
