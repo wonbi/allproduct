@@ -235,11 +235,14 @@ footer b{color:var(--steel)}
    데이터 출처 : data/products.json  (아래 스키마 참조 — README.md)
    서비스계정/인증키 없음. JSON 파일만 갈아끼우면 화면이 바뀝니다.
    ───────────────────────────────────────────────────────────── */
-const DATA_URL = 'data/products.json';
+const DATA_URL = 'https://chanwha0221-cmyk.github.io/baljuseo/data/allproduct.json';
 const pkey = s => String(s||'').replace(/\s+/g,'').toLowerCase();
 
 async function loadCatalog(){
-  const res = await fetch(DATA_URL, { cache:'no-cache' });
+  // cache:'no-cache'는 이 브라우저 캐시만 건너뛴다 — GitHub Pages 앞단 CDN은 주소가
+  // 같으면 한동안 옛 응답을 그대로 내주므로, 매번 다른 주소가 되도록 캐시버스터를 붙인다.
+  const bust = DATA_URL + (DATA_URL.indexOf('?') < 0 ? '?' : '&') + 't=' + Date.now();
+  const res = await fetch(bust, { cache:'no-cache' });
   if (!res.ok) throw new Error('상품 데이터를 읽지 못했습니다 (' + res.status + ')');
   const doc = await res.json();
   const rows = Array.isArray(doc) ? doc : (doc.products || []);
@@ -499,24 +502,49 @@ $('sorts').addEventListener('click',e=>{
   $('sorts').querySelectorAll('.sortbtn').forEach(x=>x.classList.toggle('on',x===b));
   render();
 });
+function applyLoadedCatalog(groups){
+  GROUPS = groups;
+  GROUPS.forEach(g=>g.products.forEach(p=>{ p.cat = p.cat0 || catOf(p.name); }));
+  let total=0;
+  GROUPS.forEach(g=>g.products.forEach(p=>{ total++; }));
+  $('roItems').textContent=won(total);
+  $('roWh').textContent=GROUPS.length;
+  $('sub').textContent='기존 거래처 전용 · 실제 공급가 표시'+(DOC_META.updatedAt?' · 마지막 동기화 '+DOC_META.updatedAt:'');
+  $('ft').innerHTML='마스터 유통 · 거래처 상품 카탈로그'
+    +(DOC_META.updatedAt?'<br>마지막 동기화 <b>'+esc(DOC_META.updatedAt)+'</b>':'');
+  buildRail();render();
+}
+let LAST_STAMP = null;
 (async()=>{
   try{
-    GROUPS = await loadCatalog();
-    GROUPS.forEach(g=>g.products.forEach(p=>{ p.cat = p.cat0 || catOf(p.name); }));
-    let total=0;
-    GROUPS.forEach(g=>g.products.forEach(p=>{ total++; }));
-    $('roItems').textContent=won(total);
-    $('roWh').textContent=GROUPS.length;
-    $('sub').textContent='기존 거래처 전용 · 실제 공급가 표시'+(DOC_META.updatedAt?' · 마지막 동기화 '+DOC_META.updatedAt:'');
-    $('ft').innerHTML='마스터 유통 · 거래처 상품 카탈로그'
-      +(DOC_META.updatedAt?'<br>마지막 동기화 <b>'+esc(DOC_META.updatedAt)+'</b>':'');
+    const groups = await loadCatalog();
+    LAST_STAMP = DOC_META.updatedAt || '';   // 초기 로딩 시점 기준을 바로 잡아둔다
+    applyLoadedCatalog(groups);
     $('load').style.display='none';
     $('layout').style.display='grid';
-    buildRail();render();
   }catch(e){
     $('load').innerHTML='⚠️ 상품을 불러오지 못했습니다.<div class="err">'+esc(e.message||String(e))+'</div>'
       +'<button class="retry" onclick="location.reload()">다시 시도</button>';
   }
 })();
+
+/* ── 새 데이터 자동 확인 (마스터 카탈로그와 시점 맞추기) ──────────────
+   마스터 쪽에서 카탈로그를 열 때마다 data/allproduct.json 이 자동으로 갱신된다.
+   이 페이지를 켜둔 채로도 그걸 따라가도록 5분마다 조용히 다시 읽는다.
+   updatedAt이 달라졌을 때만 다시 그린다 — 그대로면 화면(스크롤 포함)을 안 건드린다. ── */
+const AUTO_REFRESH_MS = 5 * 60 * 1000;
+async function checkForUpdate(){
+  if (document.hidden) return;
+  try{
+    const groups = await loadCatalog();
+    const stamp = DOC_META.updatedAt || '';
+    if (stamp === LAST_STAMP) return;
+    LAST_STAMP = stamp;
+    applyLoadedCatalog(groups);
+    toast('새 상품 정보로 업데이트했습니다 (' + stamp + ')');
+  }catch(e){ /* 실패해도 조용히 — 보던 화면을 깨지 않는다 */ }
+}
+setInterval(checkForUpdate, AUTO_REFRESH_MS);
+document.addEventListener('visibilitychange', function(){ if (!document.hidden) checkForUpdate(); });
 
 </script></body></html>
